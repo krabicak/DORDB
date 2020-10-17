@@ -1,0 +1,5 @@
+1. seznam všech letadel na daném letišti k urèitému datumu
+2. zjištìní všech letù ( letenek) pro daného zákazníka (ID_zakaznika)
+3. 10 nejèastìji letajicích lidi
+4. seznam ( jméno, pøíjmení, mìsto, ulice, èíslo popisné) všech zákazníkù kteøí letím daným letem
+5. Vypsani všech letadel a seøazení podle poètu absolvovaných letù

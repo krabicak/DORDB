@@ -1,0 +1,87 @@
+-- Triviální integritní omezení
+-- Tabulka Letadlo - Atribut kapacita nesmí být záporné a nulové èíslo.
+insert into Letadlo(ID_letadlo,kapacita, oznaceni, typ) values (seq_Letadlo.nextval,0, 'Airbus A300', 'civilni');
+
+		-- Atribut oznacení musí být unikátní - zajištìno unikátním klíèem, pro jednoznaèné urèení letadla
+begin
+insert into Letadlo(ID_letadlo,kapacita, oznaceni, typ) values (seq_Letadlo.nextval,250, 'Airbus A3000', 'civilni');
+insert into Letadlo(ID_letadlo,kapacita, oznaceni, typ) values (seq_Letadlo.nextval,250, 'Airbus A3000', 'civilni');
+end;
+/
+
+
+
+-- Tabulka Letenka - Atribut cena nesmí být záporné a nulové èíslo 
+insert into Letenka(ID_letenka,cena,sedadlo,ID_let) values (seq_Letenka.nextval,-1424, 14,1);
+
+		-- Atribut sedadlo nesmí být záporné.
+insert into Letenka(ID_letenka,cena,sedadlo,ID_let) values (seq_Letenka.nextval,1424, -14,1);
+
+
+
+-- Tabulka Rezervace - Atribut Datum_rezervace <= datum_zaplaceni
+insert into Rezervace(ID_rezervace,datum_rezervace,datum_zaplaceni,ID_zakaznik,id_letenka) values (seq_Let.nextval,TO_DATE('2015/9/25', 'yyyy/mm/dd'),TO_DATE('2015/9/21', 'yyyy/mm/dd'),1864,1429);
+
+
+-- Tabulka Adresa - Atribut cp nesmí být záporné a nulové èíslo.
+INSERT INTO Adresa (ID_adresa,cislo_popisne,mesto,psc,ulice,zeme) VALUES (seq_Adresa.nextval,-2567,'Široká Niva',79201,'Újezdy','Czech republic');
+
+
+-- Tabulka Let - Atribut prilet >= odlet
+insert into Let(ID_let,prilet,odlet,ID_letiste_odlet,id_letiste_prilet, id_letadlo) values (seq_Let.nextval,TO_DATE('2015/10/4', 'yyyy/mm/dd'),TO_DATE('2015/11/4', 'yyyy/mm/dd'),20,34, 12);
+		-- Atribut misto odletu a priletu musí být rùzné
+insert into Let(ID_let,prilet,odlet,ID_letiste_odlet,id_letiste_prilet, id_letadlo) values (seq_Let.nextval,TO_DATE('2015/11/4', 'yyyy/mm/dd'),TO_DATE('2015/11/4', 'yyyy/mm/dd'),20,20, 12);
+
+
+-- Tabulka Zakaznik - Atribut telefon musí být unikátní - zajištìno unikátním klíèem 
+begin
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'mharper0@zdnet.com','70TVDCA','Mildred','mharper0','Harper',7571436879,608868229,1	);
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'bmyers1@buzzfeed.com','r0hO06O4r2bW','Barbara','bmyers1','Myers',5393124979,608868229,2	);
+end;
+/
+
+		--Atribut rod_cislo musí být nenulový a nezáporný a musí být unikátní - zajištìno unikátním klíèem
+begin
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'mharper0@zdnet.com','70TVDCA','Mildred','mharper0','Harper',7571436879,608868229,1	);
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'bmyers1@buzzfeed.com','r0hO06O4r2bW','Barbara','bmyers1','Myers',7571436879,727921771,2	);
+end;
+/
+
+		-- Atribut login musí být nenulový øetìz  a musí být unikátní - zajištìno unikátním klíèem
+begin
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'mharper0@zdnet.com','70TVDCA','Mildred','mharper0','Harper',7571436879,608868229,1	);
+insert into Zakaznik(ID_zakaznik,email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa ) values (seq_Zakaznik.nextval,'bmyers1@buzzfeed.com','r0hO06O4r2bW','Barbara','mharper0','Myers',5393124979,727921771,2	);
+end;
+/
+
+
+-- Tabulka Letiste - Atributy mìsto musí být unikátní - zajištìno unikátním klíèem, pro jasné urèení destinace
+begin
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'POD','AW','Dallas',' Saarbrucken Airport ');
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'KIX','BA','Dallas',' Saint Brieuc - Armor Airport ');
+end;
+/
+		-- název letištì musí být unikátní - zajištìno unikátním klíèem, pro jasné urèení destinace
+begin
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'POD','AW','Dallas',' Saint Brieuc - Armor Airport ');
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'KIX','BA','Maºtaga',' Saint Brieuc - Armor Airport ');
+end;
+/
+		-- Atribut IATA (kód letištì - pro oznaèení) musí být unikátní - zajištìno unikátním klíèem
+begin
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'POD','AW','Dallas',' Saarbrucken Airport ');
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'POD','BA','Maºtaga',' Saint Brieuc - Armor Airport ');
+end;
+/
+		-- ICAO musí být unikátní - zajištìno unikátním klíèem
+begin
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'POD','BA','Dallas',' Saarbrucken Airport ');
+insert into Letiste(ID_letiste,IATA,ICAO,mesto,nazev) values (seq_Letiste.nextval,'KIX','BA','Maºtaga',' Saint Brieuc - Armor Airport ');
+end;
+/
+
+
+
+-- Netriviální integritní omezení -----------------------------------------------------------------------------------------------
+-- Tabulka letenka - Letenek k urèitému letu nesmí být nabídnuto více, než je kapacita pøíslušného letadla.
+insert into Letenka(ID_letenka,cena,sedadlo,ID_let) values (seq_Letenka.nextval,2466, 3,99);

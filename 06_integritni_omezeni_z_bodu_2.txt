@@ -1,0 +1,55 @@
+-- Trivialni integritini omezeni
+
+-- Tabulka Letadlo - Atribut kapacita nesmí být záporné a nulové èíslo.
+ALTER TABLE Letadlo ADD CONSTRAINT chk_kapacita CHECK (kapacita > 0);
+
+
+-- Tabulka Letenka - Atribut cena nesmí být záporné a nulové èíslo a Atribut sedadlo nesmí být záporné.
+ALTER TABLE Letenka ADD CONSTRAINT chk_Letenka CHECK(cena > 0 AND sedadlo >= 0);
+
+
+-- Tabulka Rezervace - Atribut Datum_rezervace <= datum_zaplaceni
+ALTER TABLE Rezervace ADD CONSTRAINT chk_Rezervace CHECK(datum_rezervace <= datum_zaplaceni);
+
+
+-- Tabulka Adresa - Atribut cp nesmí být záporné a nulové èíslo.
+ALTER TABLE Adresa ADD CONSTRAINT chk_Adresa CHECK(cislo_popisne > 0);
+
+
+-- Tabulka Let - Atribut prilet >= odlet a Atribut misto odletu a priletu musí být rùzné
+ALTER TABLE Let ADD CONSTRAINT chk_Let CHECK(prilet >= odlet AND ID_letiste_odlet <> ID_letiste_prilet);
+
+
+-- Tabulka Zakaznik - Atribut telefon musí být unikátní - zajištìno unikátním klíèem a Atribut rod_cislo musí být nenulový a nezáporný a musí být unikátní - zajištìno unikátním klíèem
+ALTER TABLE Zakaznik ADD CONSTRAINT chk_Zakaznik CHECK(rodne_cislo > 0 AND telefon > 0);
+
+
+
+
+-- Netrivialni integritni omezeni
+
+-- Tabulka letenka - Letenek k urèitému letu nesmí být nabídnuto více, než je kapacita pøíslušného letadla.
+CREATE OR REPLACE PROCEDURE pocet_letenek (idlet IN NUMBER) AS
+aktualni_kapacita NUMBER;
+aktualni_listky NUMBER;
+BEGIN
+  -- kapacita letadla
+  select kapacita into aktualni_kapacita from LETADLO join LET on (LETADLO.ID_LETADLO = LET.ID_LETADLO) where ID_LET = idlet;
+  -- momentální poèet letenek
+  select count(*) into aktualni_listky from LETENKA where ID_LET = idlet;
+
+    -- vyhození vyjimky
+    IF(aktualni_listky = aktualni_kapacita) THEN -- neboli jestliže se kapacita letadla = poètu již vytvoøených letenek v db
+      RAISE_APPLICATION_ERROR(-20000, 'Není možné vytvoøit další letenku.');
+    END IF;
+END;
+
+/
+CREATE TRIGGER trig_letenka
+BEFORE insert
+ON Letenka
+FOR EACH ROW
+BEGIN
+pocet_letenek(:NEW.ID_let);
+END;
+/

@@ -1,0 +1,24 @@
+SET AUTOTRACE ON;
+-- 1. seznam všech letadel na daném letišti k urèitému datumu
+select l.LETADLO_REF.Oznaceni as dostupne_letadlo from OBJ_LET l WHERE l.PRILET = '24.07.2015';
+
+
+-- 2. zjištìní všech letù ( letenek) pro daného zákazníka (ID_zakaznika) - ok
+select r.ZAKAZNIK_REF.Jmeno as Jmeno ,r.ZAKAZNIK_REF.prijmeni as Prijmeni, r.LETENKA_REF.LET_REF.prilet as datum_priletu, r.LETENKA_REF.LET_REF.odlet AS datum_odletu,r.LETENKA_REF.LET_REF.letiste_odlet_ref.mesto as mesto_odletu,r.LETENKA_REF.LET_REF.letiste_prilet_ref.mesto as mesto_priletu FROM OBJ_REZERVACE r WHERE r.ZAKAZNIK_REF.ID_ZAKAZNIK = 20;
+
+
+-- 3. 10 nejèastìji letajicích lidi
+-- SELECT * FROM (SELECT z.prijmeni as prijmeni,(select count(r.LETENKA_REF.Let_ref.id_let) FROM OBJ_Rezervace r WHERE r.ZAKAZNIK_REF.ID_zakaznik = z.ID_ZAKAZNIK) as pocet From OBJ_ZAKAZNIK z ORDER BY pocet desc, prijmeni) WHERE rownum < 11; 
+-- z neznameho duvodu se zacyklý, ale mìl by být ok
+
+
+-- 4. seznam ( jméno, pøíjmení, mìsto, ulice, èíslo popisné) všech zákazníkù kteøí letím daným letem  Prehozeny radky, nevim proc
+select r.ZAKAZNIK_REF.Jmeno as Jmeno ,r.ZAKAZNIK_REF.prijmeni as Prijmeni,r.ZAKAZNIK_REF.ADRESA_REF.mesto as Mesto,r.ZAKAZNIK_REF.ADRESA_REF.ulice as ulice,
+r.ZAKAZNIK_REF.ADRESA_REF.cislo_popisne as Cislo_popisne ,r.ZAKAZNIK_REF.ADRESA_REF.zeme as Zeme
+FROM OBJ_REZERVACE r WHERE r.LETENKA_REF.LET_REF.ID_let = 1;
+
+
+-- 5. Vypsani všech letadel a seøazení podle poètu absolvovaných letù - ok
+select lt.LETADLO_REF.Oznaceni , COUNT(lt.ID_LET) pocet FROM OBJ_LET lt GROUP BY lt.LETADLO_REF.Oznaceni ORDER BY pocet DESC;
+SET AUTOTRACE OFF;
+

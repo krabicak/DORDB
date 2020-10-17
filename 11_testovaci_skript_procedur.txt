@@ -1,0 +1,24 @@
+-- 1. Zaregistrovami zakaznika
+
+SELECT * FROM Zakaznik WHERE ID_ZAKAZNIK = (SELECT MAX(ID_ZAKAZNIK) FROM ZAKAZNIK) + 1;
+
+BEGIN
+  LETECKA_SPOLECNOST_API.VYTVOR_ZAKAZNIKA('jannovak@gmail.com', 'heslo123', 'jan', 'novaja', 'novak', 581921329, 736899111, 5);
+END;
+/
+
+SELECT * FROM Zakaznik WHERE ID_Zakaznik = (SELECT MAX(ID_Zakaznik) FROM Zakaznik);
+
+
+
+
+-- 2 vytvoreni letu
+
+SELECT * FROM Let WHERE ID_LET = (SELECT MAX(ID_LET) FROM Let) + 1;
+BEGIN
+  LETECKA_SPOLECNOST_API.VYTVOR_LET(TO_DATE('2015/05/28', 'yyyy/mm/dd'),TO_DATE('2015/05/27', 'yyyy/mm/dd'),5,8,6);
+END;
+/
+
+-- vypis
+SELECT * FROM Let WHERE ID_LET = (SELECT MAX(ID_LET) FROM Let);

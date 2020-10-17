@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8" />
+        <title>DORDB projekt</title>
+
+        <style>        
+            body {
+                font-family: Calibri, sans-serif;
+                font-size: 100%;
+                line-height: 160%;
+            }
+            
+            .okraj {
+                max-width: 999px;
+                margin: 0 auto;
+                box-shadow: 0 0 100px #888;
+                padding: 10px;
+            }
+            
+            h1, h2, h3 {
+                background-color: lightblue;
+                padding: 5px;
+                padding-left: 1em;
+            }
+            h1 {
+                text-align: center;
+            }
+            a, a:active, a:visited {
+                color: #0031ec;
+            }
+            
+            a:hover {
+                color:#ec0000;
+            }
+            
+            .info {
+                background-color: yellow;
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="okraj">
+            <h1>Letiště - projekt DORDB</h1>
+            <p><strong>Autor:</strong> Martin Jedlička</p>
+            <p> Na celém projektu jsem pracoval samostatně. </p>
+            <div class="info">
+              Poznámka vyučujícího: <br>
+              <b>Toto je pouze ukázka, jak může vypadat odevzdaný projekt. Nejedná se o příkladně zpracovanou práci, viz výtky níže:</b>
+                <ul>
+                <li> Alternativní verze dotazu pro srovnáná exekučních plánů byla vyzkoušena pouze u jednoho dotazu.
+                <li> Příliš triviální aplikační logika (očekáván víc než jeden příkaz uvnitř procedury).
+                <li> Aktualizace odvozeného sloupce pomocí +-1 není transakčně bezpečná.
+                <li> Popis datového skladu neopovídá obvyklému využití - typický dat. sklad slouží k dotazům vedoucím na agregovaná data (např. počty letů z jednotlivých letišť v jednotlivých měsících), ne jenom &quot;nej&quot; údaje z dimenzí. 
+              </ul>
+            </div>
+            <h2>1. E-R diagram</h2>
+            <p><a href="01_ER_model.png"><img src="01_ER_model.png" alt="er_diagram" title="er_diagram" width="600" /></a></p>
+            <h2>2. Slovní popis dodatečných integritních omezení</h2>
+            <h3>2.1. Triviální integritiní omezení</h3>
+            <ul>
+                <li>Tabulka Letadlo
+                    <ul>
+                        <li>Atribut <em>kapacita</em> nesmí být záporné a nulové číslo.</li>
+                        <li>Atribut <em>oznacení</em> musí být unikátní - zajištěno unikátním klíčem, pro jednoznačné určení letadla.</li>
+                    </ul>
+                </li>
+                <li>Tabulka Letenka
+                    <ul>
+                        <li>Atribut <em>cena</em> nesmí být záporné a nulové číslo.</li>
+                        <li>Atribut <em>sedadlo</em> nesmí být záporné.</li>
+                    </ul>
+                </li>    
+                <li>Tabulka Rezervace
+                    <ul>
+                        <li>Atribut <em>Datum_rezervace</em> <= <em>datum_zaplaceni</em>.</li>
+                    </ul>
+                </li>
+                <li>Tabulka Adresa
+                    <ul>
+                        <li>Atribut <em>cislo_popisne</em> nesmí být záporné a nulové číslo.</li>
+                    </ul>
+                </li>
+                <li>Tabulka Let
+                    <ul>
+                        <li>Atribut <em>prilet</em> >= <em>odlet</em>.</li>
+                        <li>Atribut <em>misto odletu</em> a <em>priletu</em> musí být různé.</li>
+                    </ul>
+                </li>
+                <li>Tabulka Letiste
+                    <ul>
+                        <li>Atributy <em>město</em> a <em>název letiště</em> musí být unikátní - zajištěno unikátním klíčem, pro jasné určení destinace.</li>
+                        <li>Atributy <em>IATO</em> a <em>ICAO</em> musí být unikátní - zajištěno unikátním klíčem</li>
+                    </ul>
+                </li>
+                <li>Zakaznik
+                    <ul>
+                        <li>Atribut <em>telefon</em> musí být unikátní - zajištěno unikátním klíčem.</li>
+                        <li>Atribut <em>rod_cislo</em> musí být nenulový a nezáporný a musí být unikátní - zajištěno unikátním klíčem.</li>
+                        <li>Atribut <em>login</em> musí být nenulový řetěz  a musí být unikátní - zajištěno unikátním klíčem.</li>
+                    </ul>
+                </li>
+            </ul>
+        <h3>2.1. Netriviální integritní omezení</h3>
+
+        <ul>
+            <li>Tabulka Letenka
+                <ul>
+                    <li>Letenek k určitému letu nesmí být nabídnuto více, než je kapacita příslušného letadla.</li>
+                </ul>
+            </li>                                         
+        </ul>
+
+    <h2>3. Slovní návrh API rozhraní „business logiky“</h2>
+    <h3>Zaregistrování zakazníka</h3>
+    <p><strong>Název:</strong> registrace_zakaznika</p>
+    <p><strong>Parametry:</strong> email, heslo, jmeno, login, prijmeni,rodne_cislo,telefon</p>
+    <p><strong>Popis:</strong> Pocedura vytvoří nový záznam v tabulce Zákazník. Zákazníka sváže s adresou v databázi.</p> 
+
+    <h3>Vytoření letu</h3>
+    <p><strong>Název:</strong> vytvor_let</p>
+    <p><strong>Parametry:</strong> prilet, odlet, ID_letiste_odlet, ID_letiste_prilet, ID_letadlo</p>
+    <p><strong>Popis:</strong> procedura vytvoří let z určitého letiště do určité destinace se zvoleným datumem odletu a příletu a se zvoleným letadlem.</p> 
+
+    <h2>4. Pět slovně formulovaných dotazů nad schématem</h2>
+
+    <ol>
+        <li>seznam všech letadel na daném letišti k určitému datumu</li>
+        <li>zjištění všech letů ( letenek) pro daného zákazníka (ID_zakaznika)</li>
+        <li>vypsání volných míst (počet) pro daný let</li>
+        <li>seznam ( jméno, příjmení, město, ulice, číslo popisné) všech zákazníků kteří letím daným letem</li>
+        <li>Vypsani všech letadel a seřazení podle počtu absolvovaných letů</li>
+    </ol>
+
+<h2>5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu</h2>
+<p><strong>Skript:</strong> <a href="05_db_schema.txt">05_db_schema.txt</a></p>
+
+<h2>6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení</h2> 
+<p><strong>Skript:</strong> <a href="06_integritni_omezeni_z_bodu_2.txt">06_integritni_omezeni_z_bodu_2.txt</a></p>
+
+<h2>7. Skript, který naplní tabulky testovacími daty</h2>  
+<p><strong>Skript:</strong> <a href="07_testovaci_data.txt">07_testovaci_data.txt</a></p>
+
+<h2>8. Skript, který provede postupně všechny navržené dotazy z bodu 4</h2>
+<p><strong>Skript:</strong> <a href="08_dotazy_z_bodu_4.txt">08_dotazy_z_bodu_4.txt</a></p>
+<p><strong>Výsledky:</strong> <a href="08_vysledky_dotazu.txt">08_vysledky_dotazu.txt</a></p>
+<p><strong>Porovnání:</strong> <a href="08_porovnani.txt">08_porovnani.txt</a></p>
+
+
+<h2>9. Skript, který se pokusí porušit všechna dodatečná integritní omezení</h2>
+<p><strong>Skript:</strong> <a href="09_poruseni_omezeni.txt">09_poruseni_omezeni.txt</a></p>
+<p><strong>Výstup:</strong> <a href="09_vystup.txt">09_vystup.txt</a></p>
+
+<h2>10. Skript pro vytvoření balíku (package) a procedur „business logiky“</h2>
+<p><strong>Skript:</strong> <a href="10_balik_a_procedury.txt">10_balik_a_procedury</a></p>
+
+<h2>11. Ověření procedur „business logiky“</h2>
+<p><strong>Skript:</strong> <a href="11_testovaci_skript_procedur.txt">11_testovaci_skript_procedur.txt</a></p>
+<p><strong>Výstupy:</strong> <a href="11_vystup.txt">11_vystup.txt</a></p>
+
+<h2>12. Skript, který doplní do tabulky Zakaznik automaticky dopočítávaný sloupec</h2>
+<p><strong>Skript:</strong> <a href="12_odvozene_hodnoty.txt">12_odvozene_hodnoty.txt</a></p>
+
+<h2>13. Skript, který vytvoří úložiště ještě jednou v „objektové“ podobě</h2>
+<p><strong>Skript:</strong> <a href="13_objektova_podoba.txt">13_objektova_podoba.txt</a></p>
+
+<h2>14. Skript, který provede pět dotazů znovu, nad objektovými tabulkami</h2>
+<p><strong>Skript:</strong> <a href="14_objektove_dotazy_z_bodu_4.txt">14_objektove_dotazy_z_bodu_4.txt</a></p>
+<p><strong>Výstup:</strong> <a href="14_vystup.txt">14_vystup.txt</a></p>
+
+<h2>15. Navrhněte slovně fakta a dimenze pro datový sklad</h2>
+<p><strong>Tabulka faktů:</strong> Let</p>
+<p><strong>Tabulka dimenzí:</strong> Letadlo, letiste, letenka, zakaznik</p>
+<p style="margin-top: 5px;"><strong>Možné analýzy:</strong> Které letadlo nejčasteji létá. Které letiště nejvíc odbavilo letů. Pro jaký let bylo prodáno nejvíc letenek. Jaký zákazník nejčasteji létá.</p>
+
+<h2 style="margin-top: 50px;">Skript pro vyčištění databáze</h2>
+<p style="margin-bottom: 10px; padding-bottom: 15px;"><strong>Skript:</strong> <a href="16_drop.txt">drop.txt</a></p>
+</div>
+</body>
+</html>

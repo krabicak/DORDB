@@ -1,0 +1,34 @@
+SET AUTOTRACE ON;
+-- 1. seznam všech letadel na daném letišti k urèitému datumu
+select oznaceni as dostupne_letadlo from Letadlo natural join Let natural join LETISTE WHERE id_letiste = 6 AND prilet = '24.07.2015';
+
+
+-- 2. zjištìní všech letù ( letenek) pro daného zákazníka (ID_zakaznika)
+-- A
+SELECT z.jmeno, z.prijmeni, lt.prilet,lt.odlet, lte.MESTO as Misto_odletu, lte2.Mesto as Misto_priletu from Zakaznik z JOIN Rezervace
+r ON(z.ID_ZAKAZNIK = r.ID_ZAKAZNIK) JOIN Letenka ltk ON(ltk.ID_LETENKA = r.ID_LETENKA) JOIN LET lt ON (ltk.ID_LET = lt.ID_LET) 
+JOIN LETISTE lte ON (lt.ID_LETISTE_ODLET = lte.ID_LETISTE) JOIN LETISTE lte2 ON (lt.ID_LETISTE_PRILET = lte2.ID_LETISTE) WHERE z.ID_ZAKAZNIK = 20;
+
+-- B
+
+
+-- 3. 10 nejèastìji letajicích lidi
+--A
+SELECT * FROM (select z.prijmeni, COUNT(lt.ID_let) AS pocet_letu FROM Letadlo ltd JOIN LET lt ON (ltd.ID_LETADLO = lt.ID_LETADLO) JOIN LETENKA ltk ON (lt.ID_let = ltk.ID_let) JOIN Rezervace r ON(ltk.ID_letenka = r.ID_letenka)
+JOIN Zakaznik z ON (r.ID_zakaznik = z.ID_zakaznik) GROUP BY z.prijmeni ORDER BY pocet_letu desc)WHERE rownum < 11;
+
+--B 
+
+-- nepovedlo se
+
+-- 4. seznam ( jméno, pøíjmení, mìsto, ulice, èíslo popisné) všech zákazníkù kteøí letím daným letem
+select jmeno, prijmeni, mesto, ulice, cislo_popisne, zeme from ZAKAZNIK natural join ADRESA natural join REZERVACE natural join LETENKA natural join LET where id_let = 1;
+
+
+-- 5. Vypsani všech letadel a seøazení podle poètu absolvovaných letù
+-- A
+SELECT oznaceni, count(id_let) AS Poèet_letu FROM Letadlo JOIN Let ON (Letadlo.ID_letadlo = Let.ID_letadlo) GROUP BY oznaceni ORDER BY Poèet_letu DESC;
+
+--B
+SELECT oznaceni, (SELECT count(id_let) FROM Let l where l.ID_letadlo = ll.ID_letadlo) AS Poèet_letù FROM Letadlo ll ORDER BY Poèet_letù DESC;
+SET AUTOTRACE OFF;

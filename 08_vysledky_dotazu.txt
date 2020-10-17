@@ -1,0 +1,331 @@
+Autotrace Enabled
+Shows the execution plan as well as statistics of the statement.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+DOSTUPNE_LETADLO                                 
+--------------------------------------------------
+Airbus A318                                        
+
+Plan hash value: 3796803147
+ 
+-------------------------------------------------------------------------------------------
+| Id  | Operation                    | Name       | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT             |            |     1 |    84 |     3   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS                |            |       |       |            |          |
+|   2 |   NESTED LOOPS               |            |     1 |    84 |     3   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS              |            |     1 |    44 |     3   (0)| 00:00:01 |
+|*  4 |     INDEX UNIQUE SCAN        | PK_LETISTE |     1 |    13 |     0   (0)| 00:00:01 |
+|*  5 |     TABLE ACCESS FULL        | LET        |     1 |    31 |     3   (0)| 00:00:01 |
+|*  6 |    INDEX UNIQUE SCAN         | PK_LETADLO |     1 |       |     0   (0)| 00:00:01 |
+|   7 |   TABLE ACCESS BY INDEX ROWID| LETADLO    |     1 |    40 |     0   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   4 - access("LETISTE"."ID_LETISTE"=6)
+   5 - filter("LET"."PRILET"=TO_DATE(' 2015-07-24 00:00:00', 'syyyy-mm-dd 
+              hh24:mi:ss') AND "ODLET"<=TO_DATE(' 2015-07-24 00:00:00', 'syyyy-mm-dd 
+              hh24:mi:ss'))
+   6 - access("LETADLO"."ID_LETADLO"="LET"."ID_LETADLO")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+JMENO                                              PRIJMENI                                           PRILET   ODLET    MISTO_ODLETU                                       MISTO_PRILETU                                    
+-------------------------------------------------- -------------------------------------------------- -------- -------- -------------------------------------------------- --------------------------------------------------
+Diana                                              Morgan                                             24.07.15 24.07.15 Salinas                                            Libušín                                            
+Diana                                              Morgan                                             01.04.15 01.04.15 Blantyre                                           Tournai                                            
+Diana                                              Morgan                                             04.11.15 04.11.15 Sindangraja                                        Picassinos                                         
+
+Plan hash value: 4250041204
+ 
+-------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name        | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |             |     3 |   768 |     9   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS                     |             |       |       |            |          |
+|   2 |   NESTED LOOPS                    |             |     3 |   768 |     9   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                   |             |     3 |   648 |     9   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                  |             |     3 |   528 |     9   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                 |             |     3 |   357 |     9   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                |             |     3 |   279 |     9   (0)| 00:00:01 |
+|   7 |        TABLE ACCESS BY INDEX ROWID| ZAKAZNIK    |     1 |    67 |     0   (0)| 00:00:01 |
+|*  8 |         INDEX UNIQUE SCAN         | PK_ZAKAZNIK |     1 |       |     0   (0)| 00:00:01 |
+|*  9 |        TABLE ACCESS FULL          | REZERVACE   |     3 |    78 |     9   (0)| 00:00:01 |
+|  10 |       TABLE ACCESS BY INDEX ROWID | LETENKA     |     1 |    26 |     0   (0)| 00:00:01 |
+|* 11 |        INDEX UNIQUE SCAN          | PK_LETENKA  |     1 |       |     0   (0)| 00:00:01 |
+|  12 |      TABLE ACCESS BY INDEX ROWID  | LET         |     1 |    57 |     0   (0)| 00:00:01 |
+|* 13 |       INDEX UNIQUE SCAN           | PK_LET      |     1 |       |     0   (0)| 00:00:01 |
+|  14 |     TABLE ACCESS BY INDEX ROWID   | LETISTE     |     1 |    40 |     0   (0)| 00:00:01 |
+|* 15 |      INDEX UNIQUE SCAN            | PK_LETISTE  |     1 |       |     0   (0)| 00:00:01 |
+|* 16 |    INDEX UNIQUE SCAN              | PK_LETISTE  |     1 |       |     0   (0)| 00:00:01 |
+|  17 |   TABLE ACCESS BY INDEX ROWID     | LETISTE     |     1 |    40 |     0   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   8 - access("Z"."ID_ZAKAZNIK"=20)
+   9 - filter("R"."ID_ZAKAZNIK"=20)
+  11 - access("LTK"."ID_LETENKA"="R"."ID_LETENKA")
+  13 - access("LTK"."ID_LET"="LT"."ID_LET")
+  15 - access("LT"."ID_LETISTE_ODLET"="LTE"."ID_LETISTE")
+  16 - access("LT"."ID_LETISTE_PRILET"="LTE2"."ID_LETISTE")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+PRIJMENI                                           POCET_LETU
+-------------------------------------------------- ----------
+Brown                                                      56 
+Harris                                                     43 
+Evans                                                      43 
+Gibson                                                     43 
+Harrison                                                   41 
+Graham                                                     39 
+Russell                                                    38 
+Harper                                                     37 
+Wilson                                                     37 
+Sanders                                                    37 
+
+ 10 rows selected 
+
+Plan hash value: 3465428708
+ 
+------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name        | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |             |    10 |   400 |    12  (25)| 00:00:01 |
+|*  1 |  COUNT STOPKEY                   |             |       |       |            |          |
+|   2 |   VIEW                           |             |  5001 |   195K|    12  (25)| 00:00:01 |
+|*  3 |    SORT ORDER BY STOPKEY         |             |  5001 |   385K|    12  (25)| 00:00:01 |
+|   4 |     HASH GROUP BY                |             |  5001 |   385K|    12  (25)| 00:00:01 |
+|   5 |      NESTED LOOPS                |             |       |       |            |          |
+|   6 |       NESTED LOOPS               |             |  5001 |   385K|    10  (10)| 00:00:01 |
+|   7 |        NESTED LOOPS              |             |  5001 |   190K|     9   (0)| 00:00:01 |
+|   8 |         TABLE ACCESS FULL        | REZERVACE   |  5001 |   126K|     9   (0)| 00:00:01 |
+|*  9 |         INDEX UNIQUE SCAN        | PK_LETENKA  |     1 |    13 |     0   (0)| 00:00:01 |
+|* 10 |        INDEX UNIQUE SCAN         | PK_ZAKAZNIK |     1 |       |     0   (0)| 00:00:01 |
+|  11 |       TABLE ACCESS BY INDEX ROWID| ZAKAZNIK    |     1 |    40 |     0   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   1 - filter(ROWNUM<11)
+   3 - filter(ROWNUM<11)
+   9 - access("LTK"."ID_LETENKA"="R"."ID_LETENKA")
+  10 - access("R"."ID_ZAKAZNIK"="Z"."ID_ZAKAZNIK")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+JMENO                                              PRIJMENI                                           MESTO                                              ULICE                                              CISLO_POPISNE ZEME                                             
+-------------------------------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- ------------- --------------------------------------------------
+Joyce                                              Franklin                                           Dobøenice                                          Ovocná                                                      7633 Czech republic                                     
+Amanda                                             Peters                                             Žïár                                               Tržní                                                       2068 Czech republic                                     
+Deborah                                            Bailey                                             Všeò                                               Pøichystalova                                                707 Czech republic                                     
+Alice                                              Williams                                           Zajeèice                                           Vymazalova                                                  8883 Czech republic                                     
+Ruth                                               King                                               Libìjovice                                         Elišky Machové                                              3365 Czech republic                                     
+Cheryl                                             Daniels                                            Vìtrný Jeníkov                                     Žabovøeská                                                  3840 Czech republic                                     
+Ann                                                Rodriguez                                          Choovice                                          Plynárenská                                                 2611 Czech republic                                     
+Sandra                                             Gibson                                             Biskupice-Pulkov                                   U dráhy                                                     6253 Czech republic                                     
+Annie                                              Robinson                                           Sobotka                                            Dunajevského                                                9703 Czech republic                                     
+Amy                                                Moreno                                             Nové Mìsto na Moravì                               Náplavka                                                    4473 Czech republic                                     
+Melissa                                            Hunt                                               Chvalnov-Lísky                                     Všetièkova                                                  5686 Czech republic                                     
+Melissa                                            Thomas                                             Pøíbraz                                            Nové Nivky                                                  9485 Czech republic                                     
+Evelyn                                             Gardner                                            Libavá                                             Živného                                                     2132 Czech republic                                     
+Jessica                                            Ortiz                                              Staré Mìsto                                        Tìsná                                                       4078 Czech republic                                     
+Alice                                              Bishop                                             Svatý Jan pod Skalou                               Podlomní                                                    6296 Czech republic                                     
+Mildred                                            Arnold                                             Bohumín                                            Vohnoutova                                                  9362 Czech republic                                     
+Carol                                              Torres                                             Louèeò                                             Vrbová                                                      3179 Czech republic                                     
+Irene                                              Harper                                             Chlumec nad Cidlinou                               Pluháèkova                                                  9436 Czech republic                                     
+Jennifer                                           Carr                                               Kohoutov                                           Drobného                                                    9778 Czech republic                                     
+Anna                                               Clark                                              Markvartovice                                      Hlinecká                                                    2690 Czech republic                                     
+Anna                                               Martinez                                           Knìževes                                           Kalinová                                                    1725 Czech republic                                     
+Nicole                                             Wells                                              Lovèièky                                           Ludvíka Podéštì                                             3974 Czech republic                                     
+Jennifer                                           Berry                                              Zlonèice                                           Toèná                                                       7756 Czech republic                                     
+Kathy                                              Green                                              Chvalatice                                         Osamìlá                                                     7534 Czech republic                                     
+Diana                                              Morgan                                             Podboøany                                          Veslaøská                                                   3868 Czech republic                                     
+Anna                                               Roberts                                            Mìèín                                              Zvonková                                                     411 Czech republic                                     
+Heather                                            Parker                                             Líšná                                              Na pískové cestì                                            5393 Czech republic                                     
+Linda                                              Riley                                              Hluboké Mašùvky                                    Bøezinova                                                   5256 Czech republic                                     
+Frances                                            Fuller                                             Vícemil                                            Purkyòova                                                   2049 Czech republic                                     
+Joan                                               Thompson                                           Stéblová                                           Slovinská                                                   7851 Czech republic                                     
+Annie                                              Schmidt                                            Pustá Kamenice                                     Klácelova                                                    816 Czech republic                                     
+Julia                                              Perry                                              Velká Jesenice                                     Mìšanská                                                   9768 Czech republic                                     
+Deborah                                            Ortiz                                              Zálezlice                                          Sladkého                                                     686 Czech republic                                     
+Nancy                                              Gray                                               Janová                                             Františkánská                                               3581 Czech republic                                     
+Anne                                               Sanders                                            Vrchlabí                                           V dolinì                                                    8255 Czech republic                                     
+Elizabeth                                          Garza                                              Benešov                                            Srbská                                                      5279 Czech republic                                     
+Marie                                              Turner                                             Praha                                              Jabloòová                                                   3922 Czech republic                                     
+Marie                                              Watkins                                            Zelenecká Lhota                                    Klicperova                                                  5138 Czech republic                                     
+Susan                                              Little                                             Jetøichovice                                       Kamenná                                                     3922 Czech republic                                     
+Robin                                              Cole                                               Klopotovice                                        Cejl                                                        2293 Czech republic                                     
+Betty                                              Payne                                              Baš                                               Klácelova                                                   8944 Czech republic                                     
+Elizabeth                                          Hughes                                             Krchleby                                           Bratislavská                                                4725 Czech republic                                     
+Joan                                               Thompson                                           Stéblová                                           Slovinská                                                   7851 Czech republic                                     
+Alice                                              Wilson                                             Všestary                                           Vysoká                                                      6509 Czech republic                                     
+Catherine                                          Dixon                                              Haèky                                              Kosíkova                                                     265 Czech republic                                     
+Ashley                                             Williamson                                         Dolní Životice                                     Na Kopaninách                                               3862 Czech republic                                     
+Norma                                              Fuller                                             Rozvadov                                           Strážní                                                     7811 Czech republic                                     
+Ruby                                               Burton                                             Kostelecké Horky                                   Synkova                                                     1369 Czech republic                                     
+Norma                                              Baker                                              Radíkovice                                         U Antoníèka                                                 2435 Czech republic                                     
+Anne                                               Perkins                                            Václavovice                                        K Západi                                                    5944 Czech republic                                     
+
+ 50 rows selected 
+
+Plan hash value: 1574278976
+ 
+-----------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name        | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |             |   133 | 31787 |     9   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS                   |             |       |       |            |          |
+|   2 |   NESTED LOOPS                  |             |   133 | 31787 |     9   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                 |             |   133 | 17556 |     9   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                |             |   133 |  6916 |     9   (0)| 00:00:01 |
+|   5 |      TABLE ACCESS FULL          | REZERVACE   |  5001 |   126K|     9   (0)| 00:00:01 |
+|*  6 |      TABLE ACCESS BY INDEX ROWID| LETENKA     |     1 |    26 |     0   (0)| 00:00:01 |
+|*  7 |       INDEX UNIQUE SCAN         | PK_LETENKA  |     1 |       |     0   (0)| 00:00:01 |
+|   8 |     TABLE ACCESS BY INDEX ROWID | ZAKAZNIK    |     1 |    80 |     0   (0)| 00:00:01 |
+|*  9 |      INDEX UNIQUE SCAN          | PK_ZAKAZNIK |     1 |       |     0   (0)| 00:00:01 |
+|* 10 |    INDEX UNIQUE SCAN            | PK_ADRESA   |     1 |       |     0   (0)| 00:00:01 |
+|  11 |   TABLE ACCESS BY INDEX ROWID   | ADRESA      |     1 |   107 |     0   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   6 - filter("LETENKA"."ID_LET"=1)
+   7 - access("REZERVACE"."ID_LETENKA"="LETENKA"."ID_LETENKA")
+   9 - access("ZAKAZNIK"."ID_ZAKAZNIK"="REZERVACE"."ID_ZAKAZNIK")
+  10 - access("ZAKAZNIK"."ID_ADRESA"="ADRESA"."ID_ADRESA")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+OZNACENI                                           POÈET_LETU
+-------------------------------------------------- ----------
+Airbus A321                                                12 
+Airbus A380                                                12 
+Boeing 747-SP                                              10 
+Airbus A310                                                10 
+Boeing 747                                                  9 
+Airbus A319                                                 9 
+Airbus A340                                                 8 
+Airbus A300                                                 7 
+Airbus A330                                                 7 
+Airbus A318                                                 6 
+Airbus A320                                                 5 
+Airbus A350                                                 4 
+Airbus A1                                                   1 
+
+ 13 rows selected 
+
+Plan hash value: 2194012097
+ 
+---------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name       | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   1 |  SORT ORDER BY                 |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   2 |   HASH GROUP BY                |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   3 |    NESTED LOOPS                |            |       |       |            |          |
+|   4 |     NESTED LOOPS               |            |   100 |  5300 |     3   (0)| 00:00:01 |
+|   5 |      TABLE ACCESS FULL         | LET        |   100 |  1300 |     3   (0)| 00:00:01 |
+|*  6 |      INDEX UNIQUE SCAN         | PK_LETADLO |     1 |       |     0   (0)| 00:00:01 |
+|   7 |     TABLE ACCESS BY INDEX ROWID| LETADLO    |     1 |    40 |     0   (0)| 00:00:01 |
+---------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   6 - access("LETADLO"."ID_LETADLO"="LET"."ID_LETADLO")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+OZNACENI                                           POÈET_LETÙ
+-------------------------------------------------- ----------
+Airbus A321                                                12 
+Airbus A380                                                12 
+Airbus A310                                                10 
+Boeing 747-SP                                              10 
+Boeing 747                                                  9 
+Airbus A319                                                 9 
+Airbus A340                                                 8 
+Airbus A330                                                 7 
+Airbus A300                                                 7 
+Airbus A318                                                 6 
+Airbus A320                                                 5 
+Airbus A350                                                 4 
+Airbus A1                                                   1 
+
+ 13 rows selected 
+
+Plan hash value: 3197529636
+ 
+-----------------------------------------------------------------------------------------------
+| Id  | Operation               | Name                | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT        |                     |    13 |   520 |     2 (100)| 00:00:01 |
+|   1 |  SORT AGGREGATE         |                     |     1 |    13 |            |          |
+|*  2 |   TABLE ACCESS FULL     | LET                 |     1 |    13 |     3   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY          |                     |    13 |   520 |     2 (100)| 00:00:01 |
+|   4 |   VIEW                  | index$_join$_002    |    13 |   520 |     1 (100)| 00:00:01 |
+|*  5 |    HASH JOIN            |                     |       |       |            |          |
+|   6 |     INDEX FAST FULL SCAN| PK_LETADLO          |    13 |   520 |     0   (0)| 00:00:01 |
+|   7 |     INDEX FAST FULL SCAN| UQ_OZNACENI_LETADLO |    13 |   520 |     0   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   2 - filter("L"."ID_LETADLO"=:B1)
+   5 - access(ROWID=ROWID)
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Autotrace Disabled

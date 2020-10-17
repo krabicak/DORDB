@@ -1,0 +1,45 @@
+-- upraveni zabulky Zakaznik
+ALTER TABLE Zakaznik ADD pocet_letu NUMBER(38) DEFAULT 0;
+
+-- prepocitani rezervaci vsech zakazniku
+BEGIN
+  FOR record IN (SELECT ID_Zakaznik FROM Zakaznik)
+  LOOP
+    UPDATE Zakaznik SET pocet_letu = (SELECT COUNT(*) FROM Let lt JOIN Letenka ltk ON (lt.ID_LET = ltk.ID_LET) 
+          JOIN Rezervace r ON(ltk.ID_Letenka = r.ID_Letenka) JOIN Zakaznik z ON(r.ID_zakaznik = z.ID_zakaznik) 
+          WHERE z.ID_zakaznik = record.ID_zakaznik) WHERE ID_zakaznik = record.ID_zakaznik;
+  END LOOP;
+END;
+/
+
+
+-- zde chyby
+
+-- vytvoreni triggeru
+CREATE OR REPLACE TRIGGER trig_lety_insert
+AFTER insert
+ON Letenka
+FOR EACH ROW
+BEGIN
+  UPDATE Zakaznik z SET pocet_letu = ((SELECT pocet_letu FROM Zakaznik zz WHERE zz.ID_ZAKAZNIK = :NEW.ID_ZAKAZNIK) + 1) WHERE z.ID_Zakaznik = :NEW.ID_Zakaznik;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trig_lety_delete
+AFTER delete
+ON Letenka
+FOR EACH ROW
+BEGIN
+  UPDATE Zakaznik z SET pocet_letu = ((SELECT pocet_letu FROM Zakaznik zz WHERE zz.ID_ZAKAZNIK = :NEW.ID_ZAKAZNIK) - 1) WHERE z.ID_Zakaznik = :NEW.ID_Zakaznik;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trig_lety_update
+AFTER update
+ON Letenka
+FOR EACH ROW
+BEGIN
+  UPDATE Zakaznik z SET pocet_letu = ((SELECT pocet_letu FROM Zakaznik zz WHERE zz.ID_ZAKAZNIK = :NEW.ID_ZAKAZNIK) + 1) WHERE z.ID_Zakaznik = :NEW.ID_Zakaznik;
+  UPDATE Zakaznik z SET pocet_letu = ((SELECT pocet_letu FROM Zakaznik zz WHERE zz.ID_ZAKAZNIK = :OLD.ID_ZAKAZNIK) - 1) WHERE z.ID_Zakaznik = :OLD.ID_Zakaznik;
+END;
+/

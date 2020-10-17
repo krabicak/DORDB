@@ -1,0 +1,105 @@
+-- Vytvoreni UDT
+CREATE OR REPLACE TYPE T_Adresa AS OBJECT
+(
+	ID_adresa      NUMBER(38) ,
+	cislo_popisne  NUMBER(5) ,
+	mesto          VARCHAR(50) ,
+	psc            NUMBER(5) ,
+	ulice          VARCHAR(50) ,
+	zeme           VARCHAR(50) 
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Let AS OBJECT
+(
+	ID_let             NUMBER(38) ,
+	prilet             DATE ,
+	odlet              DATE ,
+	letiste_odlet_ref REF T_Letiste,
+	letiste_prilet_ref  REF T_Letiste,
+	letadlo_ref REF  T_Letadlo
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Letadlo AS OBJECT
+(
+	ID_letadlo  NUMBER(38) ,
+	kapacita    NUMBER(3) ,
+	oznaceni    VARCHAR(50) ,
+	typ         VARCHAR(50) 
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Letenka AS OBJECT
+(
+	ID_letenka  NUMBER(38) ,
+	cena        NUMBER(6,2) ,
+	sedadlo     NUMBER(3) ,
+	let_ref REF T_Let
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Letiste AS OBJECT
+(
+	ID_letiste  NUMBER(38) ,
+	IATA        VARCHAR(3) ,
+	ICAO        VARCHAR(2) ,
+	mesto       VARCHAR(50) ,
+	nazev       VARCHAR(50) 
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Rezervace AS OBJECT
+(
+	ID_rezervace     NUMBER(38) ,
+	datum_rezervace  DATE ,
+	datum_zaplaceni  DATE ,
+	zakaznik_ref REF T_Zakaznik ,
+	letenka_ref REF T_Letenka
+)
+;
+/
+
+CREATE OR REPLACE TYPE T_Zakaznik AS OBJECT
+(
+	ID_zakaznik  NUMBER(38) ,
+	email        VARCHAR(50) ,
+	heslo        VARCHAR(15) ,
+	jmeno        VARCHAR(50) ,
+	login        VARCHAR(13) ,
+	prijmeni     VARCHAR(50) ,
+	rodne_cislo  NUMBER(10) ,
+	telefon      VARCHAR(13) ,
+	adresa_ref REF T_Adresa
+)
+;
+/
+
+-- vytvoreni objektovych tabulek
+CREATE TABLE OBJ_Adresa of T_Adresa;
+CREATE TABLE OBJ_Zakaznik of T_Zakaznik;
+CREATE TABLE OBJ_Letiste of T_Letiste;
+CREATE TABLE OBJ_Letadlo of T_Letadlo;
+CREATE TABLE OBJ_Let of T_Let;
+CREATE TABLE OBJ_Letenka of T_Letenka;
+CREATE TABLE OBJ_Rezervace of T_Rezervace;
+
+-- napleni objektovych tabulek
+INSERT INTO OBJ_Adresa SELECT * FROM Adresa;
+INSERT INTO OBJ_Zakaznik SELECT z.ID_zakaznik,z.email,z.heslo,z.jmeno,z.login,z.prijmeni,z.rodne_cislo,z.telefon, 
+(SELECT REF (o) FROM OBJ_Adresa o WHERE o.ID_adresa = z.ID_adresa) FROM Zakaznik z ;
+
+INSERT INTO OBJ_Letiste SELECT * FROM Letiste;
+INSERT INTO OBJ_Letadlo SELECT * FROM Letadlo;
+
+INSERT INTO OBJ_Let SELECT lt.ID_let,lt.prilet,lt.odlet,(SELECT REF(o) FROM OBJ_Letiste o WHERE o.ID_letiste = lt.ID_letiste_odlet), (SELECT REF(o) FROM OBJ_Letiste o WHERE o.ID_letiste = lt.ID_letiste_prilet),
+(SELECT REF(o) FROM OBJ_Letadlo o WHERE o.ID_letadlo = lt.ID_letadlo) FROM Let lt;
+
+INSERT INTO OBJ_Letenka SELECT ltk.ID_letenka, ltk.cena,ltk.sedadlo, (SELECT REF(o) FROM OBJ_Let o WHERE o.ID_let = ltk.ID_let) FROM Letenka ltk ;
+INSERT INTO OBJ_Rezervace SELECT r.ID_rezervace, r.datum_rezervace, r.datum_zaplaceni, (SELECT REF(o) FROM OBJ_Zakaznik o WHERE o.ID_zakaznik = r.ID_zakaznik),
+(SELECT REF(o) FROM OBJ_Letenka o WHERE o.ID_letenka = r.ID_letenka) FROM Rezervace r;

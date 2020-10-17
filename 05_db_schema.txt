@@ -1,0 +1,223 @@
+CREATE TABLE Adresa
+(
+	ID_adresa      NUMBER(38) NOT NULL,
+	cislo_popisne  NUMBER(5) NOT NULL,
+	mesto          VARCHAR(50) NOT NULL,
+	psc            NUMBER(5) NOT NULL,
+	ulice          VARCHAR(50) NOT NULL,
+	zeme           VARCHAR(50) NOT NULL
+)
+;
+
+
+CREATE TABLE Let
+(
+	ID_let             NUMBER(38) NOT NULL,
+	prilet             DATE NOT NULL,
+	odlet              DATE NOT NULL,
+	ID_letiste_odlet   NUMBER(38) NOT NULL,
+	ID_letiste_prilet  NUMBER(38) NOT NULL,
+	ID_letadlo         NUMBER(38) NOT NULL
+)
+;
+
+
+CREATE TABLE Letadlo
+(
+	ID_letadlo  NUMBER(38) NOT NULL,
+	kapacita    NUMBER(3) NOT NULL,
+	oznaceni    VARCHAR(50) NOT NULL,
+	typ         VARCHAR(50) NOT NULL
+)
+;
+
+
+CREATE TABLE Letenka
+(
+	ID_letenka  NUMBER(38) NOT NULL,
+	cena        NUMBER(6,2) NOT NULL,
+	sedadlo     NUMBER(3) NOT NULL,
+	ID_let      NUMBER(38) NOT NULL
+)
+;
+
+
+CREATE TABLE Letiste
+(
+	ID_letiste  NUMBER(38) NOT NULL,
+	IATA        VARCHAR(3) NOT NULL,
+	ICAO        VARCHAR(2) NOT NULL,
+	mesto       VARCHAR(50) NOT NULL,
+	nazev       VARCHAR(50) NOT NULL
+)
+;
+
+
+CREATE TABLE Rezervace
+(
+	ID_rezervace     NUMBER(38) NOT NULL,
+	datum_rezervace  DATE NOT NULL,
+	datum_zaplaceni  DATE NOT NULL,
+	ID_zakaznik      NUMBER(38) NOT NULL,
+	ID_letenka       NUMBER(38) NOT NULL
+)
+;
+
+
+CREATE TABLE Zakaznik
+(
+	ID_zakaznik  NUMBER(38) NOT NULL,
+	email        VARCHAR(50) NOT NULL,
+	heslo        VARCHAR(15) NOT NULL,
+	jmeno        VARCHAR(50) NOT NULL,
+	login        VARCHAR(13) NOT NULL,
+	prijmeni     VARCHAR(50) NOT NULL,
+	rodne_cislo  NUMBER(10) NOT NULL,
+	telefon      VARCHAR(13) NOT NULL,
+	ID_adresa    NUMBER(38) NOT NULL
+)
+;
+
+
+
+ALTER TABLE Adresa ADD CONSTRAINT PK_Adresa 
+	PRIMARY KEY (ID_adresa)
+;
+
+ALTER TABLE Let ADD CONSTRAINT PK_Let 
+	PRIMARY KEY (ID_let)
+;
+
+ALTER TABLE Letadlo ADD CONSTRAINT PK_Letadlo 
+	PRIMARY KEY (ID_letadlo)
+;
+
+ALTER TABLE Letenka ADD CONSTRAINT PK_Letenka 
+	PRIMARY KEY (ID_letenka)
+;
+
+ALTER TABLE Letiste ADD CONSTRAINT PK_Letiste 
+	PRIMARY KEY (ID_letiste)
+;
+
+ALTER TABLE Rezervace ADD CONSTRAINT PK_Rezervace 
+	PRIMARY KEY (ID_rezervace)
+;
+
+ALTER TABLE Zakaznik ADD CONSTRAINT PK_Zakaznik 
+	PRIMARY KEY (ID_zakaznik)
+;
+
+
+-- Unique
+
+ALTER TABLE Zakaznik
+	ADD CONSTRAINT UQ_Login UNIQUE (login)
+;
+
+ALTER TABLE Zakaznik
+	ADD CONSTRAINT UQ_Rodne_cislo UNIQUE (rodne_cislo)
+;
+
+ALTER TABLE Zakaznik
+	ADD CONSTRAINT UQ_Telefon UNIQUE (telefon)
+;
+
+ALTER TABLE Zakaznik
+	ADD CONSTRAINT UQ_Email UNIQUE (email)
+;
+
+ALTER TABLE Letadlo
+	ADD CONSTRAINT UQ_Oznaceni_Letadlo UNIQUE (oznaceni)
+;
+
+ALTER TABLE Letiste
+	ADD CONSTRAINT UQ_IATA UNIQUE (IATA)
+;
+
+ALTER TABLE Letiste
+	ADD CONSTRAINT UQ_ICAO UNIQUE (ICAO)
+;
+
+ALTER TABLE Letiste
+	ADD CONSTRAINT UQ_Letiste_mesto UNIQUE (mesto)
+;
+
+ALTER TABLE Letiste
+	ADD CONSTRAINT UQ_Letiste_nazev UNIQUE (nazev)
+;
+
+
+
+ALTER TABLE Let ADD CONSTRAINT FK_Let_Letadlo 
+	FOREIGN KEY (ID_letadlo) REFERENCES Letadlo (ID_letadlo)
+;
+
+ALTER TABLE Let ADD CONSTRAINT FK_Let_odlet_Letiste 
+	FOREIGN KEY (ID_letiste_odlet) REFERENCES Letiste (ID_letiste)
+;
+
+ALTER TABLE Let ADD CONSTRAINT FK_Let_prilet_Letiste 
+	FOREIGN KEY (ID_letiste_prilet) REFERENCES Letiste (ID_letiste)
+;
+
+ALTER TABLE Letenka ADD CONSTRAINT FK_Letenka_Let 
+	FOREIGN KEY (ID_let) REFERENCES Let (ID_let)
+;
+
+ALTER TABLE Rezervace ADD CONSTRAINT FK_Rezervace_Letenka 
+	FOREIGN KEY (ID_zakaznik) REFERENCES Letenka (ID_letenka)
+;
+
+ALTER TABLE Rezervace ADD CONSTRAINT FK_Rezervace_Zakaznik 
+	FOREIGN KEY (ID_zakaznik) REFERENCES Zakaznik (ID_zakaznik)
+;
+
+ALTER TABLE Zakaznik ADD CONSTRAINT FK_Zakaznik_Adresa 
+	FOREIGN KEY (ID_adresa) REFERENCES Adresa (ID_adresa)
+;
+
+
+-- Sekvence pro primarni klice tabulek
+
+CREATE SEQUENCE seq_Adresa
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Zakaznik
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Rezervace
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Letenka
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Let
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Letiste
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;
+
+CREATE SEQUENCE seq_Letadlo
+  START WITH 1
+  INCREMENT BY 1
+  NOCACHE
+  NOCYCLE;

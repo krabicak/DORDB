@@ -1,0 +1,35 @@
+A) Triviální integritní omezení
+Tabulka Letadlo
+Atribut kapacita nesmí být záporné a nulové èíslo.
+Atribut oznacení musí být unikátní - zajištìno unikátním klíèem, pro jednoznaèné urèení letadla
+
+Tabulka Letenka
+Atribut cena nesmí být záporné a nulové èíslo.
+Atribut sedadlo nesmí být záporné.
+
+Tabulka Rezervace
+Atribut Datum_rezervace <= datum_zaplaceni
+
+Tabulka Adresa
+Atribut cp nesmí být záporné a nulové èíslo.
+
+Tabulka Let
+Atribut prilet >= odlet
+Atribut misto odletu a priletu musí být rùzné
+
+Tabulka Letiste
+Atributy mìsto a název letištì musí být unikátní - zajištìno unikátním klíèem, pro jasné urèení destinace
+Atributy IATO (kód letištì - pro oznaèení) a ICAO (ètyø místné oznaèení) musí být unikátní - zajištìno unikátním klíèem
+
+Tabulka Zakaznik
+Atribut telefon musí být unikátní - zajištìno unikátním klíèem
+Atribut rod_cislo musí být nenulový a nezáporný a musí být unikátní - zajištìno unikátním klíèem
+Atribut login musí být nenulový øetìz  a musí být unikátní - zajištìno unikátním klíèem
+
+Tabulka Letiste
+
+
+
+B) Netriviální integritní omezení
+Tabulka letenka
+Letenek k urèitému letu nesmí být nabídnuto více, než je kapacita pøíslušného letadla.

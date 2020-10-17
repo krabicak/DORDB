@@ -1,0 +1,3 @@
+Tabulka faktù: Let
+Tabulka dimenzí: Letadlo, letiste, letenka, zakaznik.
+Možné analýzy: Které letadlo nejèasteji lítá. Které letištì nejvíc odbavilo letù. Pro jaký let bylo prodáno nejvíc letenek. Jaký zákazník nejèasteji létá.

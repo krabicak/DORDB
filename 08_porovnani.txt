@@ -1,0 +1,98 @@
+Autotrace Enabled
+Shows the execution plan as well as statistics of the statement.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+OZNACENI                                           POÈET_LETU
+-------------------------------------------------- ----------
+Airbus A321                                                12 
+Airbus A380                                                12 
+Boeing 747-SP                                              10 
+Airbus A310                                                10 
+Boeing 747                                                  9 
+Airbus A319                                                 9 
+Airbus A340                                                 8 
+Airbus A300                                                 7 
+Airbus A330                                                 7 
+Airbus A318                                                 6 
+Airbus A320                                                 5 
+Airbus A350                                                 4 
+Airbus A1                                                   1 
+
+ 13 rows selected 
+
+Plan hash value: 2194012097
+ 
+---------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name       | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   1 |  SORT ORDER BY                 |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   2 |   HASH GROUP BY                |            |   100 |  5300 |     5  (40)| 00:00:01 |
+|   3 |    NESTED LOOPS                |            |       |       |            |          |
+|   4 |     NESTED LOOPS               |            |   100 |  5300 |     3   (0)| 00:00:01 |
+|   5 |      TABLE ACCESS FULL         | LET        |   100 |  1300 |     3   (0)| 00:00:01 |
+|*  6 |      INDEX UNIQUE SCAN         | PK_LETADLO |     1 |       |     0   (0)| 00:00:01 |
+|   7 |     TABLE ACCESS BY INDEX ROWID| LETADLO    |     1 |    40 |     0   (0)| 00:00:01 |
+---------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   6 - access("LETADLO"."ID_LETADLO"="LET"."ID_LETADLO")
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+OZNACENI                                           POÈET_LETÙ
+-------------------------------------------------- ----------
+Airbus A321                                                12 
+Airbus A380                                                12 
+Airbus A310                                                10 
+Boeing 747-SP                                              10 
+Boeing 747                                                  9 
+Airbus A319                                                 9 
+Airbus A340                                                 8 
+Airbus A330                                                 7 
+Airbus A300                                                 7 
+Airbus A318                                                 6 
+Airbus A320                                                 5 
+Airbus A350                                                 4 
+Airbus A1                                                   1 
+
+ 13 rows selected 
+
+Plan hash value: 3197529636
+ 
+-----------------------------------------------------------------------------------------------
+| Id  | Operation               | Name                | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT        |                     |    13 |   520 |     2 (100)| 00:00:01 |
+|   1 |  SORT AGGREGATE         |                     |     1 |    13 |            |          |
+|*  2 |   TABLE ACCESS FULL     | LET                 |     1 |    13 |     3   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY          |                     |    13 |   520 |     2 (100)| 00:00:01 |
+|   4 |   VIEW                  | index$_join$_002    |    13 |   520 |     1 (100)| 00:00:01 |
+|*  5 |    HASH JOIN            |                     |       |       |            |          |
+|   6 |     INDEX FAST FULL SCAN| PK_LETADLO          |    13 |   520 |     0   (0)| 00:00:01 |
+|   7 |     INDEX FAST FULL SCAN| UQ_OZNACENI_LETADLO |    13 |   520 |     0   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   2 - filter("L"."ID_LETADLO"=:B1)
+   5 - access(ROWID=ROWID)
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Autotrace Disabled

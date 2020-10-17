@@ -1,0 +1,12 @@
+-- 1 vytvoreni zakaznika
+
+ID_ZAKAZNIK EMAIL                                              HESLO           JMENO                                              LOGIN         PRIJMENI                                           RODNE_CISLO TELEFON        ID_ADRESA
+----------- -------------------------------------------------- --------------- -------------------------------------------------- ------------- -------------------------------------------------- ----------- ------------- ----------
+       2004 jannovak@gmail.com                                 heslo123        jan                                                novaja        novak                                                581921329 736899111              5 
+
+
+
+--2 vytvoreni letu
+    ID_LET PRILET   ODLET    ID_LETISTE_ODLET ID_LETISTE_PRILET ID_LETADLO
+---------- -------- -------- ---------------- ----------------- ----------
+      5104 28.05.15 27.05.15                5                 8          6 

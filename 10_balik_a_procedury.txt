@@ -1,0 +1,18 @@
+CREATE OR REPLACE PACKAGE letecka_spolecnost_api AS
+   PROCEDURE vytvor_zakaznika (email IN VARCHAR, heslo IN VARCHAR, jmeno IN VARCHAR, login IN VARCHAR, prijmeni IN VARCHAR, rodne_cislo IN NUMBER, telefon IN VARCHAR, ID_adresa IN NUMBER);
+   PROCEDURE vytvor_let (prilet IN DATE,odlet IN DATE,ID_letiste_odlet IN NUMBER,id_letiste_prilet IN NUMBER, id_letadlo IN NUMBER);
+END letecka_spolecnost_api;
+/
+
+CREATE OR REPLACE PACKAGE BODY letecka_spolecnost_api AS
+  PROCEDURE vytvor_zakaznika (email IN VARCHAR, heslo IN VARCHAR, jmeno IN VARCHAR, login IN VARCHAR, prijmeni IN VARCHAR, rodne_cislo IN NUMBER, telefon IN VARCHAR, ID_adresa IN NUMBER) AS
+    BEGIN
+      INSERT INTO Zakaznik VALUES (seq_Zakaznik.nextval, email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa );
+  END vytvor_zakaznika;
+  
+  PROCEDURE vytvor_let (prilet IN DATE,odlet IN DATE,ID_letiste_odlet IN NUMBER,id_letiste_prilet IN NUMBER, id_letadlo IN NUMBER) AS    
+    BEGIN  
+      INSERT INTO Let VALUES (seq_Let.nextval, prilet,odlet,ID_letiste_odlet,id_letiste_prilet, id_letadlo);
+  END vytvor_let;  
+END letecka_spolecnost_api;
+/

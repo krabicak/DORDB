@@ -1,0 +1,178 @@
+Autotrace Enabled
+Shows the execution plan as well as statistics of the statement.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+DOSTUPNE_LETADLO                                 
+--------------------------------------------------
+Airbus A318                                        
+
+Plan hash value: 641899103
+ 
+-----------------------------------------------------------------------------
+| Id  | Operation         | Name    | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------
+|   0 | SELECT STATEMENT  |         |     1 |    36 |     3   (0)| 00:00:01 |
+|*  1 |  TABLE ACCESS FULL| OBJ_LET |     1 |    36 |     3   (0)| 00:00:01 |
+-----------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   1 - filter("L"."PRILET"=TO_DATE(' 2015-07-24 00:00:00', 'syyyy-mm-dd 
+              hh24:mi:ss'))
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+JMENO                                              PRIJMENI                                           DATUM_PRILETU DATUM_ODLETU MESTO_ODLETU                                       MESTO_PRILETU                                    
+-------------------------------------------------- -------------------------------------------------- ------------- ------------ -------------------------------------------------- --------------------------------------------------
+Diana                                              Morgan                                             24.07.15      24.07.15     Salinas                                            LibuöÌn                                            
+Diana                                              Morgan                                             01.04.15      01.04.15     Blantyre                                           Tournai                                            
+Diana                                              Morgan                                             04.11.15      04.11.15     Sindangraja                                        Picassinos                                         
+
+Plan hash value: 902731048
+ 
+-----------------------------------------------------------------------------------
+| Id  | Operation         | Name          | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT  |               |     3 |   162 |    25   (0)| 00:00:01 |
+|*  1 |  TABLE ACCESS FULL| OBJ_REZERVACE |     3 |   162 |    25   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   1 - filter("R"."ZAKAZNIK_REF"."ID_ZAKAZNIK"=20)
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+JMENO                                              PRIJMENI                                           MESTO                                              ULICE                                              CISLO_POPISNE ZEME                                             
+-------------------------------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- ------------- --------------------------------------------------
+Amanda                                             Peters                                             éÔ·r                                               TrûnÌ                                                       2068 Czech republic                                     
+Deborah                                            Bailey                                             VöeÚ                                               P¯ichystalova                                                707 Czech republic                                     
+Alice                                              Williams                                           ZajeËice                                           Vymazalova                                                  8883 Czech republic                                     
+Ruth                                               King                                               LibÏjovice                                         Eliöky MachovÈ                                              3365 Czech republic                                     
+Elizabeth                                          Garza                                              Beneöov                                            Srbsk·                                                      5279 Czech republic                                     
+Joyce                                              Franklin                                           Dob¯enice                                          Ovocn·                                                      7633 Czech republic                                     
+Annie                                              Robinson                                           Sobotka                                            DunajevskÈho                                                9703 Czech republic                                     
+Amy                                                Moreno                                             NovÈ MÏsto na MoravÏ                               N·plavka                                                    4473 Czech republic                                     
+Cheryl                                             Daniels                                            VÏtrn˝ JenÌkov                                     éabov¯esk·                                                  3840 Czech republic                                     
+Ann                                                Rodriguez                                          Choùovice                                          Plyn·rensk·                                                 2611 Czech republic                                     
+Marie                                              Turner                                             Praha                                              JabloÚov·                                                   3922 Czech republic                                     
+Sandra                                             Gibson                                             Biskupice-Pulkov                                   U dr·hy                                                     6253 Czech republic                                     
+Melissa                                            Thomas                                             P¯Ìbraz                                            NovÈ Nivky                                                  9485 Czech republic                                     
+Evelyn                                             Gardner                                            Libav·                                             éivnÈho                                                     2132 Czech republic                                     
+Melissa                                            Hunt                                               Chvalnov-LÌsky                                     VöetiËkova                                                  5686 Czech republic                                     
+Jessica                                            Ortiz                                              StarÈ MÏsto                                        TÏsn·                                                       4078 Czech republic                                     
+Marie                                              Watkins                                            Zeleneck· Lhota                                    Klicperova                                                  5138 Czech republic                                     
+Alice                                              Bishop                                             Svat˝ Jan pod Skalou                               PodlomnÌ                                                    6296 Czech republic                                     
+Mildred                                            Arnold                                             BohumÌn                                            Vohnoutova                                                  9362 Czech republic                                     
+Carol                                              Torres                                             LouËeÚ                                             Vrbov·                                                      3179 Czech republic                                     
+Irene                                              Harper                                             Chlumec nad Cidlinou                               Pluh·Ëkova                                                  9436 Czech republic                                     
+Anna                                               Clark                                              Markvartovice                                      Hlineck·                                                    2690 Czech republic                                     
+Anna                                               Martinez                                           KnÏûeves                                           Kalinov·                                                    1725 Czech republic                                     
+Jennifer                                           Berry                                              ZlonËice                                           ToËn·                                                       7756 Czech republic                                     
+Kathy                                              Green                                              Chvalatice                                         OsamÏl·                                                     7534 Czech republic                                     
+Nicole                                             Wells                                              LovËiËky                                           LudvÌka PodÈötÏ                                             3974 Czech republic                                     
+Jennifer                                           Carr                                               Kohoutov                                           DrobnÈho                                                    9778 Czech republic                                     
+Diana                                              Morgan                                             Podbo¯any                                          Vesla¯sk·                                                   3868 Czech republic                                     
+Heather                                            Parker                                             LÌön·                                              Na pÌskovÈ cestÏ                                            5393 Czech republic                                     
+Linda                                              Riley                                              HlubokÈ Maö˘vky                                    B¯ezinova                                                   5256 Czech republic                                     
+Frances                                            Fuller                                             VÌcemil                                            PurkyÚova                                                   2049 Czech republic                                     
+Joan                                               Thompson                                           StÈblov·                                           Slovinsk·                                                   7851 Czech republic                                     
+Julia                                              Perry                                              Velk· Jesenice                                     MÏöùansk·                                                   9768 Czech republic                                     
+Annie                                              Schmidt                                            Pust· Kamenice                                     Kl·celova                                                    816 Czech republic                                     
+Anna                                               Roberts                                            MÏËÌn                                              Zvonkov·                                                     411 Czech republic                                     
+Anne                                               Sanders                                            VrchlabÌ                                           V dolinÏ                                                    8255 Czech republic                                     
+Deborah                                            Ortiz                                              Z·lezlice                                          SladkÈho                                                     686 Czech republic                                     
+Nancy                                              Gray                                               Janov·                                             Frantiök·nsk·                                               3581 Czech republic                                     
+Susan                                              Little                                             Jet¯ichovice                                       Kamenn·                                                     3922 Czech republic                                     
+Joan                                               Thompson                                           StÈblov·                                           Slovinsk·                                                   7851 Czech republic                                     
+Alice                                              Wilson                                             Vöestary                                           Vysok·                                                      6509 Czech republic                                     
+Robin                                              Cole                                               Klopotovice                                        Cejl                                                        2293 Czech republic                                     
+Betty                                              Payne                                              Baöù                                               Kl·celova                                                   8944 Czech republic                                     
+Elizabeth                                          Hughes                                             Krchleby                                           Bratislavsk·                                                4725 Czech republic                                     
+Catherine                                          Dixon                                              HaËky                                              KosÌkova                                                     265 Czech republic                                     
+Ashley                                             Williamson                                         DolnÌ éivotice                                     Na Kopanin·ch                                               3862 Czech republic                                     
+Ruby                                               Burton                                             KosteleckÈ Horky                                   Synkova                                                     1369 Czech republic                                     
+Norma                                              Baker                                              RadÌkovice                                         U AntonÌËka                                                 2435 Czech republic                                     
+Anne                                               Perkins                                            V·clavovice                                        K Z·padi                                                    5944 Czech republic                                     
+Norma                                              Fuller                                             Rozvadov                                           Str·ûnÌ                                                     7811 Czech republic                                     
+
+ 50 rows selected 
+
+Plan hash value: 902731048
+ 
+-----------------------------------------------------------------------------------
+| Id  | Operation         | Name          | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT  |               |    47 |  2538 |    25   (0)| 00:00:01 |
+|*  1 |  TABLE ACCESS FULL| OBJ_REZERVACE |    47 |  2538 |    25   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------
+ 
+Predicate Information (identified by operation id):
+---------------------------------------------------
+ 
+   1 - filter("R"."LETENKA_REF"."LET_REF"."ID_LET"=1)
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+LETADLO_REF.OZNACENI                                    POCET
+-------------------------------------------------- ----------
+Airbus A380                                                12 
+Airbus A321                                                12 
+Boeing 747-SP                                              10 
+Airbus A310                                                10 
+Boeing 747                                                  9 
+Airbus A319                                                 9 
+Airbus A340                                                 8 
+Airbus A300                                                 7 
+Airbus A330                                                 7 
+Airbus A318                                                 6 
+Airbus A320                                                 5 
+Airbus A350                                                 4 
+Airbus A1                                                   1 
+
+ 13 rows selected 
+
+Plan hash value: 1295016485
+ 
+-------------------------------------------------------------------------------
+| Id  | Operation           | Name    | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT    |         |   100 |  4000 |     5  (40)| 00:00:01 |
+|   1 |  SORT ORDER BY      |         |   100 |  4000 |     5  (40)| 00:00:01 |
+|   2 |   HASH GROUP BY     |         |   100 |  4000 |     5  (40)| 00:00:01 |
+|   3 |    TABLE ACCESS FULL| OBJ_LET |   100 |  4000 |     3   (0)| 00:00:01 |
+-------------------------------------------------------------------------------
+ 
+Note
+-----
+   - dynamic sampling used for this statement (level=2)
+
+Unable to gather statistics please unsure user has correct access.
+The statistic feature requires that the user is granted select on v_$sesstat, v_$statname and v_$session.
+Autotrace Disabled
