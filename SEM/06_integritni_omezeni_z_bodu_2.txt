@@ -1,0 +1,17 @@
+-- Trivialni integritini omezeni
+
+--Tabulka Pracovnik
+--Atribut mobil musí být unikátní - zajištěno unikátním klíčem
+ALTER TABLE PRACOVNIK ADD CONSTRAINT PRACOVNIK__U1 UNIQUE ( MOBIL );
+
+--Atribut email musí být unikátní - zajištěno unikátním klíčem
+ALTER TABLE PRACOVNIK ADD CONSTRAINT PRACOVNIK__U2 UNIQUE ( EMAIL );
+
+--Tabulka Predmet
+--Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
+ALTER TABLE PREDMET ADD CONSTRAINT PREDMET__U1 UNIQUE ( ZKRATKA );
+
+
+--Tabulka Pracoviste
+--Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
+ALTER TABLE PRACOVISTE ADD CONSTRAINT PRACOVISTE__U1 UNIQUE ( ZKRATKA );

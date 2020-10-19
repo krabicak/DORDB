@@ -1,0 +1,41 @@
+A) Triviální integritní omezení
+Tabulka Pracovnik
+Atribut mobil musí být unikátní - zajištěno unikátním klíčem
+Atribut email musí být unikátní - zajištěno unikátním klíčem
+
+Tabulka Predmet
+Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
+
+Tabulka Pracoviste
+Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
+
+
+
+
+
+Tabulka Rezervace
+Atribut Datum_rezervace <= datum_zaplaceni
+
+Tabulka Adresa
+Atribut cp nesmí být záporné a nulové číslo.
+
+Tabulka Let
+Atribut prilet >= odlet
+Atribut misto odletu a priletu musí být různé
+
+Tabulka Letiste
+Atributy město a název letiště musí být unikátní - zajištěno unikátním klíčem, pro jasné určení destinace
+Atributy IATO (kód letiště - pro označení) a ICAO (čtyř místné označení) musí být unikátní - zajištěno unikátním klíčem
+
+Tabulka Zakaznik
+Atribut telefon musí být unikátní - zajištěno unikátním klíčem
+Atribut rod_cislo musí být nenulový a nezáporný a musí být unikátní - zajištěno unikátním klíčem
+Atribut login musí být nenulový řetěz  a musí být unikátní - zajištěno unikátním klíčem
+
+Tabulka Letiste
+
+
+
+B) Netriviální integritní omezení
+Tabulka letenka
+Letenek k určitému letu nesmí být nabídnuto více, než je kapacita příslušného letadla.
