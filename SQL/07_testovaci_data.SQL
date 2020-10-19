@@ -1,4 +1,7 @@
-rem Vlozeni testovacich dat do tabulky zakonceni_predmetu
+rem Skript pro vlozeni testovacich dat
+
+
+rem Vlozeni dat do tabulky zakonceni_predmetu
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('KZ','Klasifikovaný zápočet');
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('ZK','Zkouška');
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('KPZ','Klauzurní postupová zkouška');
@@ -17,3 +20,70 @@ Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('SZZ','
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('ZP','Zápočet');
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('ZZV','Zápočet za VŠKP');
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('ZZ','Závěrečná zkouška');
+
+
+rem Vlozeni dat do tabulky pracoviste
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra archeologie','ARCH');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Archiv','ARCHIV');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Augustin','AUG');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Centrum informačních technologií UHK','CIT');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Centrum jazykové přípravy','CJP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Centrum základního a aplikovaného výzkumu','CZAV');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('děkanát PdF','DĚKPDF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('děkanát PřF','DĚKPŘF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('děkanát FF','DFF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Ekonomický úsek','EÚ');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Filozofická fakulta','FF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Fakulta informatiky a managementu','FIM');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Nakladatelství Gaudeamus','GAU');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Historický ústav','HIU');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Hudební katedra','HUDK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Institut dalšího vzdělávání','IDV');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Institut moderních informačních technologií','IMIT');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra anglického jazyka a literatury','KAJL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra aplikované lingvistiky','KAL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra biologie','KBI');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra českého jazyka a literatury','KČJL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra ekonomie','KE');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra francouzského jazyka a literatury','KFJL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra filozofie a společenských věd','KFSV');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra fyziky','KFY');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra chemie','KCH');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra informatiky a kvantitativních metod','KIKM');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra informačních technologií','KIT');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra kulturních a náboženských studií','KKNS');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra kybernetiky','KKY');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra managementu','KM');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra matematiky','KMA');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Univerzitní knihovna UHK','KNIH');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra německého jazyka a literatury','KNJL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Vysokoškolské koleje UHK - Palachova','KOLEJ');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra politologie','KP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra pedagogiky a psychologie','KPP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra pomocných věd historických a archivnictví','KPVHA');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra rekreologie a cestovního ruchu','KRCR');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra ruského jazyka a literatury','KRJL');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra sociologie','KSOC');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra sociální pedagogiky','KSOCP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra speciální pedagogiky','KSPECP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra sociální patologie a sociologie','KSPSOC');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra technických předmětů','KTP');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra tělesné výchovy a sportu','KTVS');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Katedra výtvarné kultury a textilní tvorby','KVKTT');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Oddělení projektů a tvůrčí činnosti','OPTČ');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Oddělení veřejných zakázek','OVZ');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Poradenské centrum UHK','PCUHK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Pedagogická fakulta','PDF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Podatelna a spisovna','PODA');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Přírodovědecká fakulta','PŘF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Univerzita Hradec Králové','REK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Studijní oddělení FIM','SOFIM');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('studijní oddělení Pedagogické fakulty','SOPDF');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Studijní oddělení - rektorát','SOREK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Sekretatiát rektora','SRK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Rektorát - správa UHK','SUHK');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('TPÚ - údržba','TPÚ');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('TPÚ - doprava','TPÚD');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('PÚ - služby','TPÚS');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Ústav primární a preprimární edukace','ÚPPE');
+Insert into PRACOVISTE (NAZEV,ZKRATKA) values ('Ústav sociální práce FF','USP');

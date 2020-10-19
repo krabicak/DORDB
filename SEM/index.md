@@ -28,7 +28,7 @@
 **Skript:** [05_db_schema.SQL](../SQL/05_db_schema.SQL)
 ##6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení
 ##7. Skript, který naplní tabulky testovacími daty
-***Zatim jen zakonceni predmetu***
+***Zatim jen zakonceni predmetu a misto vyuky***
 
 **Skript:** [07_testovaci_data.SQL](../SQL/07_testovaci_data.SQL)
 ##8. Skript, který provede postupně všechny navržené dotazy z bodu 4
