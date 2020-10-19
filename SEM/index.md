@@ -2,9 +2,17 @@
 
 **Autoři:** Petr Hotovec a Petr Kůla
 
-Všichni dělali všechno
+**Krabičák**
+
+- Skript pro vytvoření databázového schématu
+
+**Kůlič**
+
+- E-R diagram
+- tahle dokumentace
+
 ##1. E-R diagram
-![ERdiagram](schema.png)
+![ERdiagram](01_ER_model.PNG)
 
 ##2. Slovní popis dodatečných integritních omezení
 ###2.1. Triviální integritiní omezení
