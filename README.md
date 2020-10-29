@@ -1,8 +1,8 @@
-# DORDB
+# DORDB #
 
-# Rozvrh prací
+# Rozvrh prací #
 
-##KŮLA
+## KŮLA ##
 1. Obrázek s modelem (E-R diagram)
 4. Návrh pěti slovně formulovaných dotazů nad schématem
 7. Skript, který naplní tabulky testovacími daty
@@ -12,7 +12,7 @@
 14. Skript, který vytvoří databázové schéma odpovídající E-R diagramu datového skladu
 16. Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem
 
-##KRABIČÁK
+## KRABIČÁK ##
 2. Slovní popis dodatečných integritních omezení
 3. Návrh API rozhraní „business logiky“ pro dva procesy
 5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu
