@@ -47,7 +47,7 @@ CREATE TABLE pracovnik (
     pracovisteid  INTEGER,
     heslo         NVARCHAR2(100) NOT NULL,
     plat          INTEGER NOT NULL,
-    nadrizenyid   INTEGER NOT NULL
+    nadrizenyid   INTEGER
 );
 
 ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_pk PRIMARY KEY ( pracovnikid );
