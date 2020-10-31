@@ -1,5 +1,10 @@
 rem Skript pro vlozeni testovacich dat
 
+rem vlozeni do zpusobu vyuky
+INSERT INTO ZPUSOB_VYUKY (ZKRATA, NAZEVZPUSOBU) VALUES (N'PŘ', N'Přednáška')
+INSERT INTO ZPUSOB_VYUKY (ZKRATA, NAZEVZPUSOBU) VALUES (N'CV', N'Cvičení')
+
+
 rem vlozeni do tabulky kategorie predmetu
 INSERT INTO KATEGORIE_PREDMETU (ZKRATKAKATEGORIE, NAZEVKATEGORIE) VALUES (N'A', N'Povinný')
 INSERT INTO KATEGORIE_PREDMETU (ZKRATKAKATEGORIE, NAZEVKATEGORIE) VALUES (N'B', N'Povinně volitelný')
