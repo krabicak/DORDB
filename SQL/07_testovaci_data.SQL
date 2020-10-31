@@ -1,5 +1,10 @@
 rem Skript pro vlozeni testovacich dat
 
+rem vlozeni do tabulky kategorie predmetu
+INSERT INTO KATEGORIE_PREDMETU (ZKRATKAKATEGORIE, NAZEVKATEGORIE) VALUES (N'A', N'Povinný');
+INSERT INTO KATEGORIE_PREDMETU (ZKRATKAKATEGORIE, NAZEVKATEGORIE) VALUES (N'B', N'Povinně volitelný');
+INSERT INTO KATEGORIE_PREDMETU (ZKRATKAKATEGORIE, NAZEVKATEGORIE) VALUES (N'C', N'Volitelný');
+
 
 rem Vlozeni dat do tabulky zakonceni_predmetu
 Insert into ZAKONCENI_PREDMETU (ZKRATKAZAKONCENI,NAZEVZAKONCENI) values ('KZ','Klasifikovaný zápočet');
