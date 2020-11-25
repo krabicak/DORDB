@@ -1,0 +1,26 @@
+Vytvoøení výukové akce
+Název: vytvoreni_vyukove_akce
+Parametry: 
+Popis:
+
+
+Zápis studenta
+Název: zapis_studenta
+Parametry:
+Popis:
+
+
+
+
+Zaregistrování zakazníka
+
+Název: registrace_zakaznika
+Parametry: email, heslo, jmeno, login, prijmeni,rodne_cislo,telefon.
+Popis: procedura vytvoøí nový záznam v tabulce Zákazník. Zákazníka sváže s adresou v databázi.
+
+
+Vytoøení letu
+
+Název: vytvor_let
+Parametry: prilet, odlet, ID_letiste_odlet, ID_letiste_prilet, ID_letadlo
+Popis: procedura vytvoøí let z urèitého letištì do urèité destinace se zvoleným datumem odletu a pøíletu a se zvoleným letadlem.
