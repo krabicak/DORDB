@@ -13,10 +13,10 @@
 > 16. Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem
 
 ## KRABIČÁK ##
-> 2. Slovní popis dodatečných integritních omezení
+> 2. Slovní popis dodatečných integritních omezení - DONE
 > 3. Návrh API rozhraní „business logiky“ pro dva procesy
-> 5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu
-> 6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení
+> 5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu - DONE
+> 6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení -DONE
 > 8. Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy
 > 10. Skript pro vytvoření balíku (package) a procedur „business logiky“ 
 > 11. Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury
