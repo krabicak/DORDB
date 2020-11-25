@@ -1,0 +1,9 @@
+drop table kategorie_predmetu;
+drop table pracoviste;
+drop table pracovnik;
+drop table predmet;
+drop table usebna;
+drop table vyukova_akce;
+drop table zakonceni_predmetu;
+drop table zpusob_vyuky;
+drop table ucebna;
