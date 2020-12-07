@@ -14,7 +14,7 @@
 
 ## KRABIČÁK ##
 > 2. Slovní popis dodatečných integritních omezení - DONE
-> 3. Návrh API rozhraní „business logiky“ pro dva procesy
+> 3. Návrh API rozhraní „business logiky“ pro dva procesy - DONE
 > 5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu - DONE
 > 6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení -DONE
 > 8. Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy
