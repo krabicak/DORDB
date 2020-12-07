@@ -119,6 +119,14 @@ CREATE TABLE zpusob_vyuky (
 
 ALTER TABLE zpusob_vyuky ADD CONSTRAINT zpusob_vyuky_pk PRIMARY KEY ( zkrata );
 
+CREATE TABLE zapis_predmetu (
+    predmetid   INTEGER NOT NULL,
+    studentid   INTEGER NOT NULL,
+    pokus       INTEGER,
+    vystudovan  CHAR(1)
+)
+LOGGING;
+
 ALTER TABLE pracovnik
     ADD CONSTRAINT pracovnik_pracoviste_fk FOREIGN KEY ( pracovisteid )
         REFERENCES pracoviste ( pracovisteid );
@@ -162,6 +170,14 @@ ALTER TABLE vyukova_akce
 ALTER TABLE vyukova_akce
     ADD CONSTRAINT vyukova_akce_zpusob_vyuky_fk FOREIGN KEY ( zpusobvyukyzkrata )
         REFERENCES zpusob_vyuky ( zkrata );
+
+ALTER TABLE zapis_predmetu
+    ADD CONSTRAINT zapis_predmetu_predmet_fk FOREIGN KEY ( predmetid )
+        REFERENCES predmet ( predmetid );
+
+ALTER TABLE zapis_predmetu
+    ADD CONSTRAINT zapis_predmetu_student_fk FOREIGN KEY ( studentid )
+        REFERENCES student ( studentid );
 
 CREATE SEQUENCE mistnost_mistnostid_seq START WITH 1 NOCACHE ORDER;
 

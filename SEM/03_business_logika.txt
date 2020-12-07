@@ -1,26 +1,11 @@
-Vytvoøení vıukové akce
-Název: vytvoreni_vyukove_akce
-Parametry: 
-Popis:
+ZÃ¡pis studenta do pÅ™edmÄ›tu
+NÃ¡zev: zapis_predmetu
+Parametry: studentid, predmetid
+Popis: zapÃ­Å¡e studenta do pÅ™edmÄ›tu, pÅ™ed samotnÃ½m vloÅ¾enÃ­m zkotroluje zda-li pÅ™edmÄ›t jiÅ¾ nevystudoval nebo nevyÄerpal 2 moÅ¾nÃ© pokusy na zÃ¡pis.
 
 
-Zápis studenta
-Název: zapis_studenta
-Parametry:
-Popis:
+ZÃ¡pis studenta na vÃ½ukovou akci
 
-
-
-
-Zaregistrování zakazníka
-
-Název: registrace_zakaznika
-Parametry: email, heslo, jmeno, login, prijmeni,rodne_cislo,telefon.
-Popis: procedura vytvoøí novı záznam v tabulce Zákazník. Zákazníka sváe s adresou v databázi.
-
-
-Vytoøení letu
-
-Název: vytvor_let
-Parametry: prilet, odlet, ID_letiste_odlet, ID_letiste_prilet, ID_letadlo
-Popis: procedura vytvoøí let z urèitého letištì do urèité destinace se zvolenım datumem odletu a pøíletu a se zvolenım letadlem.
+NÃ¡zev: zapis_vyukove_akce
+Parametry: studentid, vyukovaakceid
+Popis: procedura zapÃ­Å¡e studenta na vÃ½ukovou akci, zÃ¡roveÅˆ kontroluji zda-li se student zapsal na danÃ½ pÅ™edmÄ›t.

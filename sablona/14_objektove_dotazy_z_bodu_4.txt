@@ -1,24 +1,24 @@
 SET AUTOTRACE ON;
--- 1. seznam vöech letadel na danÈm letiöti k urËitÈmu datumu
+-- 1. seznam v≈°ech letadel na dan√©m leti≈°ti k urƒçit√©mu datumu
 select l.LETADLO_REF.Oznaceni as dostupne_letadlo from OBJ_LET l WHERE l.PRILET = '24.07.2015';
 
 
--- 2. zjiötÏnÌ vöech let˘ ( letenek) pro danÈho z·kaznÌka (ID_zakaznika) - ok
+-- 2. zji≈°tƒõn√≠ v≈°ech let≈Ø ( letenek) pro dan√©ho z√°kazn√≠ka (ID_zakaznika) - ok
 select r.ZAKAZNIK_REF.Jmeno as Jmeno ,r.ZAKAZNIK_REF.prijmeni as Prijmeni, r.LETENKA_REF.LET_REF.prilet as datum_priletu, r.LETENKA_REF.LET_REF.odlet AS datum_odletu,r.LETENKA_REF.LET_REF.letiste_odlet_ref.mesto as mesto_odletu,r.LETENKA_REF.LET_REF.letiste_prilet_ref.mesto as mesto_priletu FROM OBJ_REZERVACE r WHERE r.ZAKAZNIK_REF.ID_ZAKAZNIK = 20;
 
 
--- 3. 10 nejËastÏji letajicÌch lidi
+-- 3. 10 nejƒçastƒõji letajic√≠ch lidi
 -- SELECT * FROM (SELECT z.prijmeni as prijmeni,(select count(r.LETENKA_REF.Let_ref.id_let) FROM OBJ_Rezervace r WHERE r.ZAKAZNIK_REF.ID_zakaznik = z.ID_ZAKAZNIK) as pocet From OBJ_ZAKAZNIK z ORDER BY pocet desc, prijmeni) WHERE rownum < 11; 
--- z neznameho duvodu se zacykl˝, ale mÏl by b˝t ok
+-- z neznameho duvodu se zacykl√Ω, ale mƒõl by b√Ωt ok
 
 
--- 4. seznam ( jmÈno, p¯ÌjmenÌ, mÏsto, ulice, ËÌslo popisnÈ) vöech z·kaznÌk˘ kte¯Ì letÌm dan˝m letem  Prehozeny radky, nevim proc
+-- 4. seznam ( jm√©no, p≈ô√≠jmen√≠, mƒõsto, ulice, ƒç√≠slo popisn√©) v≈°ech z√°kazn√≠k≈Ø kte≈ô√≠ let√≠m dan√Ωm letem  Prehozeny radky, nevim proc
 select r.ZAKAZNIK_REF.Jmeno as Jmeno ,r.ZAKAZNIK_REF.prijmeni as Prijmeni,r.ZAKAZNIK_REF.ADRESA_REF.mesto as Mesto,r.ZAKAZNIK_REF.ADRESA_REF.ulice as ulice,
 r.ZAKAZNIK_REF.ADRESA_REF.cislo_popisne as Cislo_popisne ,r.ZAKAZNIK_REF.ADRESA_REF.zeme as Zeme
 FROM OBJ_REZERVACE r WHERE r.LETENKA_REF.LET_REF.ID_let = 1;
 
 
--- 5. Vypsani vöech letadel a se¯azenÌ podle poËtu absolvovan˝ch let˘ - ok
+-- 5. Vypsani v≈°ech letadel a se≈ôazen√≠ podle poƒçtu absolvovan√Ωch let≈Ø - ok
 select lt.LETADLO_REF.Oznaceni , COUNT(lt.ID_LET) pocet FROM OBJ_LET lt GROUP BY lt.LETADLO_REF.Oznaceni ORDER BY pocet DESC;
 SET AUTOTRACE OFF;
 
