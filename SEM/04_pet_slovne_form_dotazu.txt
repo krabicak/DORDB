@@ -1,0 +1,5 @@
+1. seznam všech výukových akcí urřitého studenta v určitý den
+2. seznam všech pracovišť a zobrazení hiearchie každého z nich
+3. 5 nejčastěji využívaných místností
+4. seznam všech studentů, kteří mají zapsaný daný předmět
+5. seznam všech vyučujících seřazený podle počtu hodin, které učí

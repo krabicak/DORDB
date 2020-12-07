@@ -2,9 +2,9 @@
 
 # Rozvrh prací #
 
-## KŮLA ##
-> 1. Obrázek s modelem (E-R diagram)
-> 4. Návrh pěti slovně formulovaných dotazů nad schématem
+## KŮLIČ ##
+> 1. Obrázek s modelem (E-R diagram) - až nakonec
+> 4. Návrh pěti slovně formulovaných dotazů nad schématem - DONE
 > 7. Skript, který naplní tabulky testovacími daty
 > 9. Skript, který se pokusí porušit postupně všechna dodatečná integritní omezení
 > 12. Skript, který doplní do zvolené tabulky schématu sloupec
