@@ -1,11 +1,12 @@
 Zápis studenta do předmětu
-Název: zapis_predmetu
+
+Název: zapsat_predmet
 Parametry: studentid, predmetid
 Popis: zapíše studenta do předmětu, před samotným vložením zkotroluje zda-li předmět již nevystudoval nebo nevyčerpal 2 možné pokusy na zápis.
 
 
 Zápis studenta na výukovou akci
 
-Název: zapis_vyukove_akce
+Název: zapsat_vyukovou_akci
 Parametry: studentid, vyukovaakceid
 Popis: procedura zapíše studenta na výukovou akci, zároveň kontroluji zda-li se student zapsal na daný předmět.
