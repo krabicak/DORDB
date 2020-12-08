@@ -49,6 +49,25 @@ end;
 --Netrivialní integritní omezení
 --Tabulka Vyukova_akce
 --Nelze vytvořit vyukovou akci pro více studentů, než kolik se vejde do místnosti
+SET SERVEROUTPUT ON 
+declare
+v_predmetid NUMBER(38,0);
+v_mistnostid NUMBER(38,0);
+v_maxstudentu NUMBER(38,0);
+
+begin
+select min(mistnostid) into v_mistnostid from mistnost where kapacita > 0;
+select max(predmetid) into v_predmetid from predmet;
+select kapacita into v_maxstudentu from mistnost where mistnostid = v_mistnostid;
+dbms_output.put_line('ID mistnosti: ' || v_mistnostid);
+dbms_output.put_line('kapacita: ' || v_maxstudentu);
+v_maxstudentu := v_maxstudentu + 10;
+dbms_output.put_line('zvysena kapacita: ' || v_maxstudentu);
+dbms_output.put_line('predmet ID: ' || v_predmetid);
+insert into vyukova_akce(maxstudentu,zpusobvyukyzkrata,pocatek,konec,predmetid,mistnostid) values(v_maxstudentu,'PR','01/12/2020','31/12/2020',v_predmetid,v_mistnostid);
+end;
+/
+--NEFUNGUJE!!!!!!!!!!!!!!!!!!!!!!!
 
 --Tabulka Zapis
 --Nelze zapsat více studentů na výukovou akci než je kapacita
