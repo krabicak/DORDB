@@ -1,3 +1,4 @@
+spool 'C:/Users/Petr/Desktop/09_vystup.txt';
 --Trivialni integritini omezeni
 
 --Tabulka Vyukova_akce 
@@ -86,3 +87,4 @@ insert into zapis(studentid,vyukovaakceid) values(v_studentidmax,v_posledniidakc
 
 end;
 /
+spool off;
