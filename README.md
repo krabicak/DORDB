@@ -21,7 +21,7 @@ množinových operací, agregací, atd.)
 (pro generování testovacích dat můžete použít různé již hotové nástroje).
 
 - **[9.] ✓Skript, který se pokusí porušit postupně všechna dodatečná integritní omezení + výstup spool z provádění tohoto skriptu (budou vidět chyby při porušení I.O.)**
-- **[12.] ✓(Neni transakcne spravne!!!) Skript, který doplní do zvolené tabulky schématu sloupec, který bude obsahovat odvozené hodnoty (průměrný plat zaměstnance v rámci oddělní apod.) – tyto hodnoty budou automaticky aktualizovány pomocí triggerů**
+- **[12.] ✓Skript, který doplní do zvolené tabulky schématu sloupec, který bude obsahovat odvozené hodnoty (průměrný plat zaměstnance v rámci oddělní apod.) – tyto hodnoty budou automaticky aktualizovány pomocí triggerů**
 - **[13.] Navrhněte fakta a dimenze (E-R diagram) pro datový sklad vycházející z vaší databáze. Přidejte i časovou dimenzi.**
 - **[14.]  Skript, který vytvoří databázové schéma odpovídající E-R diagramu datového skladu.**
 - **[16.] Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem, které povedou na agregaci faktu přes několik dimenzí za určité časové období.**
