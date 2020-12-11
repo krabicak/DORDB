@@ -36,14 +36,14 @@ nebo omezení velikosti položky u řetězců nebo čísel)
 	- vyžadováno alespoň jedno „triviální omezení“ (jako např. plat 0) a jedno
 „netriviální“ omezení (vztahem k jiné tabulce, agregační funkce jako v příkladu
 s kapacitou apod.)
-- **[3.] Návrh API rozhraní „business logiky“ pro dva procesy, jako např. přijetí zaměstnance =
+- **[3.] ✓Návrh API rozhraní „business logiky“ pro dva procesy, jako např. přijetí zaměstnance =
 založení záznamu zaměstnance, svázání s nadřízeným, svázání se sdíleným služebním vozem
 (vazba N:M), založení požadavku na koupi pracovních pomůcek (jeden notebook, jedna myš).
 Procesy by měly být složitější, než jen takové, které vedou na jeden update či insert
 v proceduře.**
 	-  procedury, jejich parametry, slovní popis činnosti
 - **[5.] ✓Skript, který vytvoří databázové schéma odpovídající E-R diagramu**
-- **[6.] Skript, který vytvoří v databázovém schématu dodatečná integritní omezení -DONE**
+- **[6.] ✓Skript, který vytvoří v databázovém schématu dodatečná integritní omezení -DONE**
 	- netriviální omezení budou realizována pomocí triggerů, které budou volat uložené
 procedury provádějící kontrolu; porušení I.O. způsobí vyhození vlastní vyjímky
 - **[8.] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy**
