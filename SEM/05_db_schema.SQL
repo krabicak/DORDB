@@ -122,8 +122,8 @@ ALTER TABLE zpusob_vyuky ADD CONSTRAINT zpusob_vyuky_pk PRIMARY KEY ( zkrata );
 CREATE TABLE zapis_predmetu (
     predmetid   INTEGER NOT NULL,
     studentid   INTEGER NOT NULL,
-    pokus       INTEGER,
-    vystudovan  CHAR(1)
+    pokus       INTEGER NOT NULL,
+    vystudovan  CHAR(1) NOT NULL
 )
 LOGGING;
 
