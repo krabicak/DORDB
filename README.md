@@ -43,7 +43,7 @@ Procesy by měly být složitější, než jen takové, které vedou na jeden up
 v proceduře.**
 	-  procedury, jejich parametry, slovní popis činnosti
 - **[5.] ✓Skript, který vytvoří databázové schéma odpovídající E-R diagramu**
-- **[6.] ✓Skript, který vytvoří v databázovém schématu dodatečná integritní omezení -DONE**
+- **[6.] ✓Skript, který vytvoří v databázovém schématu dodatečná integritní omezení**
 	- netriviální omezení budou realizována pomocí triggerů, které budou volat uložené
 procedury provádějící kontrolu; porušení I.O. způsobí vyhození vlastní vyjímky
 - **[8.] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy**
@@ -54,7 +54,7 @@ výsledek
 dotazu (vracející tentýž výsledek), a porovnáním (podle cost) exekučních plánů
 (budou opět součástí výstupu) posuďte, který dotaz byl efektivnější
 
-- **[10.] Skript pro vytvoření balíku (package) a procedur „business logiky“**
+- **[10.] ✓Skript pro vytvoření balíku (package) a procedur „business logiky“**
 - **[11.] Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury**
 - **[15.] Skript pro jednoduchý ETL proces dat z vaši produkční databáze**
 - **[17.] . Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.**
