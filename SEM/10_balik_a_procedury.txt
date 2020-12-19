@@ -41,7 +41,7 @@ PROCEDURE zapsat_vyukovou_akci (STUDENT_ID IN NUMBER,vyukova_akce_id IN NUMBER) 
       FROM zapis_predmetu zp JOIN vyukova_akce va ON zp.predmetid=va.predmetid 
       WHERE va.vyukovaakceid=vyukova_akce_id AND zp.studentid=STUDENT_ID;
     IF exi = 0 THEN
-      RAISE_APPLICATION_ERROR(-20000,'Student musí bbýt nejprve zapsán do předmětu.');
+      RAISE_APPLICATION_ERROR(-20000,'Student musí být nejprve zapsán do předmětu.');
     END IF;
     INSERT INTO ZAPIS VALUES (STUDENT_ID,vyukova_akce_id);
   END zapsat_vyukovou_akci;  
