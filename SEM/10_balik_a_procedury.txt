@@ -1,18 +1,49 @@
 CREATE OR REPLACE PACKAGE zapis_studenta_api AS
-   PROCEDURE vytvor_zakaznika (email IN VARCHAR, heslo IN VARCHAR, jmeno IN VARCHAR, login IN VARCHAR, prijmeni IN VARCHAR, rodne_cislo IN NUMBER, telefon IN VARCHAR, ID_adresa IN NUMBER);
-   PROCEDURE vytvor_let (prilet IN DATE,odlet IN DATE,ID_letiste_odlet IN NUMBER,id_letiste_prilet IN NUMBER, id_letadlo IN NUMBER);
-END letecka_spolecnost_api;
+   PROCEDURE ZAPSAT_PREDMET (STUDENT_ID IN NUMBER,PREDMET_ID IN NUMBER);
+   PROCEDURE zapsat_vyukovou_akci (STUDENT_ID IN NUMBER,vyukova_akce_id IN NUMBER);
+END zapis_studenta_api;
 /
 
-CREATE OR REPLACE PACKAGE BODY letecka_spolecnost_api AS
-  PROCEDURE vytvor_zakaznika (email IN VARCHAR, heslo IN VARCHAR, jmeno IN VARCHAR, login IN VARCHAR, prijmeni IN VARCHAR, rodne_cislo IN NUMBER, telefon IN VARCHAR, ID_adresa IN NUMBER) AS
-    BEGIN
-      INSERT INTO Zakaznik VALUES (seq_Zakaznik.nextval, email, heslo, jmeno, login, prijmeni, rodne_cislo, telefon, ID_adresa );
-  END vytvor_zakaznika;
+CREATE OR REPLACE PACKAGE BODY zapis_studenta_api AS
+PROCEDURE ZAPSAT_PREDMET 
+(
+  STUDENT_ID IN NUMBER
+, PREDMET_ID IN NUMBER 
+) AS 
+  pok NUMBER := NULL;
+  vys NUMBER := NULL;
+  exi NUMBER := 0;
+BEGIN
+  SELECT COUNT(*) INTO exi 
+    FROM zapis_predmetu 
+    WHERE predmetid=PREDMET_ID AND studentid=STUDENT_ID;
+  IF exi != 0 THEN
+    SELECT pokus,vystudovan INTO pok,vys 
+        FROM zapis_predmetu 
+        WHERE predmetid=PREDMET_ID AND studentid=STUDENT_ID;
+    IF vys = 1 THEN
+        RAISE_APPLICATION_ERROR(-20000,'Nelze zapsat již vystudovaný předmět.');
+    END IF;
+    IF pok>=3 THEN
+        RAISE_APPLICATION_ERROR(-20000,'Byl vyčerpán limit zapsání předmětu.');
+    END IF;
+    pok := pok + 1;
+    UPDATE zapis_predmetu SET pokus=pok WHERE studentid=student_id AND predmetid=predmet_id;
+  ELSE 
+    INSERT INTO zapis_predmetu VALUES (STUDENT_ID,PREDMET_ID,1,0);
+  END IF;
+END ZAPSAT_PREDMET;
   
-  PROCEDURE vytvor_let (prilet IN DATE,odlet IN DATE,ID_letiste_odlet IN NUMBER,id_letiste_prilet IN NUMBER, id_letadlo IN NUMBER) AS    
-    BEGIN  
-      INSERT INTO Let VALUES (seq_Let.nextval, prilet,odlet,ID_letiste_odlet,id_letiste_prilet, id_letadlo);
-  END vytvor_let;  
-END letecka_spolecnost_api;
+PROCEDURE zapsat_vyukovou_akci (STUDENT_ID IN NUMBER,vyukova_akce_id IN NUMBER) AS  
+  exi NUMBER := 0;
+  BEGIN
+    SELECT COUNT(*) INTO exi
+      FROM zapis_predmetu zp JOIN vyukova_akce va ON zp.predmetid=va.predmetid 
+      WHERE va.vyukovaakceid=vyukova_akce_id AND zp.studentid=STUDENT_ID;
+    IF exi = 0 THEN
+      RAISE_APPLICATION_ERROR(-20000,'Student musí být nejprve zapsán do předmětu.');
+    END IF;
+    INSERT INTO ZAPIS VALUES (STUDENT_ID,vyukova_akce_id);
+  END zapsat_vyukovou_akci;  
+END zapis_studenta_api;
 /
