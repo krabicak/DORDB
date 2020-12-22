@@ -5,17 +5,29 @@ select oznaceni as dostupne_letadlo from Letadlo natural join Let natural join L
 
 -- 2. zjištìní všech letù ( letenek) pro daného zákazníka (ID_zakaznika)
 -- A
-SELECT z.jmeno, z.prijmeni, lt.prilet,lt.odlet, lte.MESTO as Misto_odletu, lte2.Mesto as Misto_priletu from Zakaznik z JOIN Rezervace
-r ON(z.ID_ZAKAZNIK = r.ID_ZAKAZNIK) JOIN Letenka ltk ON(ltk.ID_LETENKA = r.ID_LETENKA) JOIN LET lt ON (ltk.ID_LET = lt.ID_LET) 
-JOIN LETISTE lte ON (lt.ID_LETISTE_ODLET = lte.ID_LETISTE) JOIN LETISTE lte2 ON (lt.ID_LETISTE_PRILET = lte2.ID_LETISTE) WHERE z.ID_ZAKAZNIK = 20;
+SELECT z.jmeno, z.prijmeni, lt.prilet,lt.odlet, lte.MESTO as Misto_odletu, lte2.Mesto as Misto_priletu 
+from Zakaznik z 
+JOIN Rezervace r ON(z.ID_ZAKAZNIK = r.ID_ZAKAZNIK) 
+JOIN Letenka ltk ON(ltk.ID_LETENKA = r.ID_LETENKA) 
+JOIN LET lt ON (ltk.ID_LET = lt.ID_LET) 
+JOIN LETISTE lte ON (lt.ID_LETISTE_ODLET = lte.ID_LETISTE) 
+JOIN LETISTE lte2 ON (lt.ID_LETISTE_PRILET = lte2.ID_LETISTE) 
+WHERE z.ID_ZAKAZNIK = 20;
 
 -- B
 
 
 -- 3. 10 nejèastìji letajicích lidi
 --A
-SELECT * FROM (select z.prijmeni, COUNT(lt.ID_let) AS pocet_letu FROM Letadlo ltd JOIN LET lt ON (ltd.ID_LETADLO = lt.ID_LETADLO) JOIN LETENKA ltk ON (lt.ID_let = ltk.ID_let) JOIN Rezervace r ON(ltk.ID_letenka = r.ID_letenka)
-JOIN Zakaznik z ON (r.ID_zakaznik = z.ID_zakaznik) GROUP BY z.prijmeni ORDER BY pocet_letu desc)WHERE rownum < 11;
+SELECT * FROM 
+(select z.prijmeni, COUNT(lt.ID_let) AS pocet_letu 
+FROM Letadlo ltd 
+JOIN LET lt ON (ltd.ID_LETADLO = lt.ID_LETADLO) 
+JOIN LETENKA ltk ON (lt.ID_let = ltk.ID_let) 
+JOIN Rezervace r ON(ltk.ID_letenka = r.ID_letenka)
+JOIN Zakaznik z ON (r.ID_zakaznik = z.ID_zakaznik) 
+GROUP BY z.prijmeni ORDER BY pocet_letu desc)
+WHERE rownum < 11;
 
 --B 
 
