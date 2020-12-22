@@ -8,7 +8,7 @@ BEGIN FOR r_product IN (
     SELECT * FROM student
 ) LOOP
     select count(*) into v_sumaakci from zapis where studentid = r_product.studentid;
-    update student set pocetakci = v_sumaakci where studentid = r_product.studentid;
+    update student set pocethodin = v_sumaakci where studentid = r_product.studentid;
  end loop;
 END;
 /
