@@ -1,32 +1,35 @@
 SET AUTOTRACE ON;
 -- 1. seznam všech výukových akcí urřitého studenta v určitý den
-SELECT va.* FROM VYUKOVA_AKCE va JOIN ZAPIS z ON z.VYUKOVAAKCEID=va.VYUKOVAAKCEID WHERE z.STUDENTID=1;
+SELECT va.* 
+    FROM VYUKOVA_AKCE va JOIN ZAPIS z ON z.VYUKOVAAKCEID=va.VYUKOVAAKCEID WHERE z.STUDENTID=1;
 
 -- 2. seznam všech pracovniků a zobrazení hiearchie každého z nich
-SELECT p.*, LEVEL FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid
+SELECT p.*, LEVEL 
+    FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid
 
 
 -- 3. 5 nejčastěji využívaných místností
 --A
-SELECT * FROM
-(SELECT m.MISTNOSTID, m. COUNT(va.MISTNOSTID) AS PocetAkci 
-FROM VYUKOVA_AKCE va
-    JOIN MISTNOST m ON m.MISTNOSTID=va.MISTNOSTID
-GROUP BY m.MISTNOSTID)
-ORDER BY PocetAkci desc WHERE rownum < 6;
+SELECT * 
+    FROM
+    (SELECT m.MISTNOSTID, COUNT(va.MISTNOSTID) AS PocetAkci 
+        FROM VYUKOVA_AKCE va
+            JOIN MISTNOST m ON m.MISTNOSTID=va.MISTNOSTID
+        GROUP BY m.MISTNOSTID ORDER BY PocetAkci desc)
+WHERE rownum < 6;
 
 --B 
 
--- nepovedlo se
-
 -- 4. seznam všech studentů, kteří mají zapsaný daný předmět
-select jmeno, prijmeni, mesto, ulice, cislo_popisne, zeme from ZAKAZNIK natural join ADRESA natural join REZERVACE natural join LETENKA natural join LET where id_let = 1;
+select s.* 
+    from STUDENT s JOIN ZAPIS_PREDMETU z on s.STUDENTID=z.STUDENTID where z.PREDMETID=1;
 
 
 -- 5. seznam všech vyučujících seřazený podle počtu hodin, které učí
 -- A
-SELECT oznaceni, count(id_let) AS Počet_letu FROM Letadlo JOIN Let ON (Letadlo.ID_letadlo = Let.ID_letadlo) GROUP BY oznaceni ORDER BY Počet_letu DESC;
+SELECT p.pracovnikid, sum(va.konec-va.pocatek)
+    FROM PRACOVNIK p JOIN VYUCUJICI v ON p.PRACOVNIKID=v.PRACOVNIKID
+    JOIN VYUKOVA_AKCE va ON va.VYUKOVAAKCEID=v.VYUKOVAAKCEID
+    GROUP BY p.pracovnikid
 
 --B
-SELECT oznaceni, (SELECT count(id_let) FROM Let l where l.ID_letadlo = ll.ID_letadlo) AS Počet_letů FROM Letadlo ll ORDER BY Počet_letů DESC;
-SET AUTOTRACE OFF;
