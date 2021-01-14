@@ -46,7 +46,7 @@ v proceduře.**
 - **[6.] ✓Skript, který vytvoří v databázovém schématu dodatečná integritní omezení**
 	- netriviální omezení budou realizována pomocí triggerů, které budou volat uložené
 procedury provádějící kontrolu; porušení I.O. způsobí vyhození vlastní vyjímky
-- **[8.] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy**
+- **[8.] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy** - pottřeba doplnit spool
 	- z výstupu bude patrný dotaz, jeho exekuční plán (použijte SET AUTOTRACE ON) a
 výsledek
 
@@ -55,6 +55,6 @@ dotazu (vracející tentýž výsledek), a porovnáním (podle cost) exekučníc
 (budou opět součástí výstupu) posuďte, který dotaz byl efektivnější
 
 - **[10.] ✓Skript pro vytvoření balíku (package) a procedur „business logiky“**
-- **[11.] Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury**
+- **[11.] Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury** - potřeba dopnit spool
 - **[15.] Skript pro jednoduchý ETL proces dat z vaši produkční databáze**
 - **[17.] . Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.**
