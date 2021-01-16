@@ -46,7 +46,7 @@ v proceduře.**
 - **[6.] ✓Skript, který vytvoří v databázovém schématu dodatečná integritní omezení**
 	- netriviální omezení budou realizována pomocí triggerů, které budou volat uložené
 procedury provádějící kontrolu; porušení I.O. způsobí vyhození vlastní vyjímky
-- **[8.] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy** - pottřeba doplnit spool
+- **[8.] ✓Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy** - pottřeba doplnit spool
 	- z výstupu bude patrný dotaz, jeho exekuční plán (použijte SET AUTOTRACE ON) a
 výsledek
 
