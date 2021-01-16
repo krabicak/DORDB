@@ -4,21 +4,6 @@
 --Atribut konec nesmí být dříve než-li atribut konec (typ DATE)
 ALTER TABLE VYUKOVA_AKCE ADD CONSTRAINT VYUKOVA_AKCE__C1 CHECK (pocatek < konec);
 
---Tabulka Pracovnik
---Atribut mobil musí být unikátní - zajištěno unikátním klíčem
-ALTER TABLE PRACOVNIK ADD CONSTRAINT PRACOVNIK__U1 UNIQUE ( MOBIL );
-
---Atribut email musí být unikátní - zajištěno unikátním klíčem
-ALTER TABLE PRACOVNIK ADD CONSTRAINT PRACOVNIK__U2 UNIQUE ( EMAIL );
-
---Tabulka Predmet
---Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
-ALTER TABLE PREDMET ADD CONSTRAINT PREDMET__U1 UNIQUE ( ZKRATKA );
-
---Tabulka Pracoviste
---Atribut zkratka musí být unikátní - zajištěno unikátním klíčem
-ALTER TABLE PRACOVISTE ADD CONSTRAINT PRACOVISTE__U1 UNIQUE ( ZKRATKA );
-
 -- Netrivialní integritní omezení
 -- Tabulka Vyukova_akce
 -- Nelze vytvořit vyukovou akci pro více studentů, než kolik se vejde do místnosti
