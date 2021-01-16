@@ -56,5 +56,5 @@ dotazu (vracející tentýž výsledek), a porovnáním (podle cost) exekučníc
 
 - **[10.] ✓Skript pro vytvoření balíku (package) a procedur „business logiky“**
 - **[11.] ✓Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury** - potřeba dopnit spool
-- **[15.] Skript pro jednoduchý ETL proces dat z vaši produkční databáze**
-- **[17.] . Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.**
+- **[15.] Skript pro jednoduchý ETL proces dat z vaši produkční databáze** - tak nějak ještě tam jsou chybičky
+- **[17.] . Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.** - čekám na 16.
