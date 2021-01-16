@@ -5,7 +5,7 @@ SELECT va.*
 
 -- 2. seznam všech pracovniků a zobrazení hiearchie každého z nich
 SELECT p.*, LEVEL 
-    FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid
+    FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid;
 
 
 -- 3. 5 nejčastěji využívaných místností
