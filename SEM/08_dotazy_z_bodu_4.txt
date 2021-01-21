@@ -5,7 +5,7 @@ SELECT va.*
 
 -- 2. seznam všech pracovniků a zobrazení hiearchie každého z nich
 SELECT p.*, LEVEL 
-    FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid
+    FROM pracovnik p CONNECT BY p.pracovnikid=p.nadrizenyid order by p.nadrizenyid;
 
 
 -- 3. 5 nejčastěji využívaných místností
@@ -20,6 +20,15 @@ WHERE rownum < 6;
 
 --B 
 
+SELECT * 
+    FROM
+    (SELECT m.MISTNOSTID, (SELECT COUNT(va.MISTNOSTID)        
+        FROM VYUKOVA_AKCE va
+        WHERE va.MISTNOSTID=m.MISTNOSTID) AS PocetAkci
+        FROM mistnost m
+        GROUP BY m.MISTNOSTID ORDER BY PocetAkci desc)
+WHERE rownum < 6;
+
 -- 4. seznam všech studentů, kteří mají zapsaný daný předmět
 select s.* 
     from STUDENT s JOIN ZAPIS_PREDMETU z on s.STUDENTID=z.STUDENTID where z.PREDMETID=1;
@@ -27,9 +36,18 @@ select s.*
 
 -- 5. seznam všech vyučujících seřazený podle počtu hodin, které učí
 -- A
-SELECT p.pracovnikid, sum(va.konec-va.pocatek)
+SELECT p.pracovnikid, sum(va.konec-va.pocatek) AS "Pocet hodin"
     FROM PRACOVNIK p JOIN VYUCUJICI v ON p.PRACOVNIKID=v.PRACOVNIKID
     JOIN VYUKOVA_AKCE va ON va.VYUKOVAAKCEID=v.VYUKOVAAKCEID
     GROUP BY p.pracovnikid
+    ORDER BY 'Pocet hodin';
 
 --B
+
+SELECT p.pracovnikid, (SELECT sum(va.konec-va.pocatek) 
+        FROM VYUCUJICI v
+        JOIN VYUKOVA_AKCE va ON va.VYUKOVAAKCEID=v.VYUKOVAAKCEID 
+        WHERE  v.PRACOVNIKID=p.pracovnikid ) AS "Pocet hodin"
+    FROM PRACOVNIK p JOIN VYUCUJICI v ON p.PRACOVNIKID=v.PRACOVNIKID
+    WHERE p.pracovnikid IS NOT NULL
+    ORDER BY 'Pocet hodin';

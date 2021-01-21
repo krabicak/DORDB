@@ -1,24 +1,29 @@
--- 1. Zaregistrovami zakaznika
+-- 1. Zapis studenta do predmetu
+SET AUTOTRACE ON;
 
-SELECT * FROM Zakaznik WHERE ID_ZAKAZNIK = (SELECT MAX(ID_ZAKAZNIK) FROM ZAKAZNIK) + 1;
+DECLARE
+  stid integer := 101;
+  pid integer := 9509;
 
 BEGIN
-  LETECKA_SPOLECNOST_API.VYTVOR_ZAKAZNIKA('jannovak@gmail.com', 'heslo123', 'jan', 'novaja', 'novak', 581921329, 736899111, 5);
-END;
-/
-
-SELECT * FROM Zakaznik WHERE ID_Zakaznik = (SELECT MAX(ID_Zakaznik) FROM Zakaznik);
-
-
-
-
--- 2 vytvoreni letu
-
-SELECT * FROM Let WHERE ID_LET = (SELECT MAX(ID_LET) FROM Let) + 1;
-BEGIN
-  LETECKA_SPOLECNOST_API.VYTVOR_LET(TO_DATE('2015/05/28', 'yyyy/mm/dd'),TO_DATE('2015/05/27', 'yyyy/mm/dd'),5,8,6);
+  zapis_studenta_api.zapsat_predmet(stid,pid);
 END;
 /
 
 -- vypis
-SELECT * FROM Let WHERE ID_LET = (SELECT MAX(ID_LET) FROM Let);
+SELECT * FROM zapis_predmetu WHERE studentid = (101) and predmetid=(1000);
+
+
+SET AUTOTRACE ON;
+-- 2. Zapis studenta na vyukovou akci
+
+DECLARE
+  stid integer := 1000;
+  vaid integer := 367;
+BEGIN
+  zapis_studenta_api.zapsat_vyukovou_akci(stid, vaid);
+END;
+/
+
+-- vypis
+SELECT * FROM zapis WHERE studentid = (1000) and vyukovaakceid=(367);
