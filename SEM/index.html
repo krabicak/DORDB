@@ -292,38 +292,73 @@ img {
 </head>
 <body>
 <h1>Školní rozvrh - projekt DORDB</h1>
-<p><strong>Autoři:</strong> Petr Hotovec a Petr Kůla</p>
-<p><strong>Krabičák</strong></p>
-<ul>
-<li>Skript pro vytvoření databázového schématu</li>
-</ul>
-<p><strong>Kůlič</strong></p>
-<ul>
-<li>E-R diagram</li>
-<li>tahle dokumentace</li>
-<li>testovací data do tabulky zakončení předmětu</li>
-</ul>
+<p><strong>Autoři:</strong> Bc. Petr Hotovec a Bc. Petr Kůla</p>
+<h2>Rozvrh prací</h2>
+<h3>Petr Kůla</h3>
+<p>[1] Obrázek s modelem (E-R diagram)</p>
+<p>[4] Návrh pěti slovně formulovaných dotazů nad schématem</p>
+<p>[7] Skript, který naplní tabulky testovacími daty</p>
+<p>[9] Skript, který se pokusí porušit postupně všechna dodatečná integritní omezení + výstup spool z provádění tohoto skriptu (budou vidět chyby při porušení I.O.)</p>
+<p>[12] Skript, který doplní do zvolené tabulky schématu sloupec, který bude obsahovat odvozené hodnoty (průměrný plat zaměstnance v rámci oddělní apod.) – tyto hodnoty budou automaticky aktualizovány pomocí triggerů</p>
+<p>[13] Navrhněte fakta a dimenze (E-R diagram) pro datový sklad vycházející z vaší databáze. Přidejte i časovou dimenzi.</p>
+<p>[14] Skript, který vytvoří databázové schéma odpovídající E-R diagramu datového skladu.</p>
+<p>[16] Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem, které povedou na agregaci faktu přes několik dimenzí za určité časové období.</p>
+<h3>Petr Hotovec</h3>
+<p>[2] Slovní popis dodatečných integritních omezení</p>
+<p>[3] Návrh API rozhraní „business logiky“ pro dva procesy, jako např. přijetí zaměstnance.</p>
+<p>[5] Skript, který vytvoří databázové schéma odpovídající E-R diagramu</p>
+<p>[6] Skript, který vytvoří v databázovém schématu dodatečná integritní omezení</p>
+<p>[8] Skript (včetně výstupu spool), který provede postupně všechny navržené dotazy</p>
+<p>[10] Skript pro vytvoření balíku (package) a procedur „business logiky“</p>
+<p>[11] Testovací skript (včetně výstupu spool obdrženého po spuštění) pro obě procedury</p>
+<p>[15] Skript pro jednoduchý ETL proces dat z vaši produkční databáze</p>
+<p>[17] Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.</p>
 <h2>1. E-R diagram</h2>
 <p><img src="01_ER_model.PNG" alt="ERdiagram" /></p>
 <h2>2. Slovní popis dodatečných integritních omezení</h2>
 <h3>2.1. Triviální integritiní omezení</h3>
+<h4>Tabulka Vyukova_akce</h4>
+<p>Atribut konec nesmí být dříve než-li atribut konec (typ DATE)</p>
 <h3>2.2. Netriviální integritní omezení</h3>
+<h4>Tabulka Vyukova_akce</h4>
+<p>Nelze vytvořit vyukovou akci pro více studentů, než kolik se vejde do místnosti</p>
+<h4>Tabulka Zapis</h4>
+<p>Nelze zapsat více studentů na výukovou akci než je kapacita</p>
+<p><a href="02_integritni_omezeni.txt">02_integritni_omezeni.txt</a></p>
 <h2>3. Slovní návrh API rozhraní „business logiky“</h2>
-<h3>Zaregistrování zakazníka</h3>
-<h3>Vytoření letu</h3>
+<h3>Zápis studenta do předmětu</h3>
+<p><strong>Název:</strong> zapsat_predmet</p>
+<p><strong>Parametry:</strong> studentid, predmetid</p>
+<p><strong>Popis:</strong> zapíše studenta do předmětu, před samotným vložením zkotroluje zda-li předmět již nevystudoval nebo nevyčerpal 2 možné pokusy na zápis.</p>
+<h3>Zápis studenta na výukovou akci</h3>
+<p><strong>Název:</strong> zapsat_vyukovou_akci</p>
+<p><strong>Parametry:</strong> studentid, vyukovaakceid</p>
+<p><strong>Popis:</strong> procedura zapíše studenta na výukovou akci, zároveň kontroluji zda-li se student zapsal na daný předmět.</p>
+<p><a href="03_business_logika.txt">03_business_logika.txt</a></p>
 <h2>4. Pět slovně formulovaných dotazů nad schématem</h2>
+<ol>
+<li>seznam všech výukových akcí urřitého studenta v určitý den</li>
+<li>seznam všech pracovišť a zobrazení hiearchie každého z nich</li>
+<li>5 nejčastěji využívaných místností</li>
+<li>seznam všech studentů, kteří mají zapsaný daný předmět</li>
+<li>seznam všech vyučujících seřazený podle počtu hodin, které učí</li>
+</ol>
+<p><a href="04_pet_slovne_form_dotazu.txt">04_pet_slovne_form_dotazu.txt</a></p>
 <h2>5. Skript, který vytvoří databázové schéma odpovídající E-R diagramu</h2>
-<p><strong><em>hotovo!!!</em></strong></p>
-<p><strong>Skript:</strong> <a href="../SQL/05_db_schema.SQL">05<em>db</em>schema.SQL</a></p>
+<p><strong>Skript:</strong> <a href="05_db_schema.SQL">05_db_schema.SQL</a></p>
 <h2>6. Skript, který vytvoří v databázovém schématu dodatečná integritní omezení</h2>
+<p><strong>Skript:</strong> <a href="06_integritni_omezeni_z_bodu_2.SQL">06_integritni_omezeni_z_bodu_2.SQL</a></p>
 <h2>7. Skript, který naplní tabulky testovacími daty</h2>
-<p><strong><em>Zatim jen zakonceni predmetu a misto vyuky</em></strong></p>
-<p><strong>Skript:</strong> <a href="../SQL/07_testovaci_data.SQL">07<em>testovaci</em>data.SQL</a></p>
+<p><strong>Skript:</strong> <a href="07_testovaci_data.SQL">07_testovaci_data.SQL</a></p>
 <h2>8. Skript, který provede postupně všechny navržené dotazy z bodu 4</h2>
 <h2>9. Skript, který se pokusí porušit všechna dodatečná integritní omezení</h2>
 <h2>10. Skript pro vytvoření balíku (package) a procedur „business logiky“</h2>
+<p><strong>Skript:</strong> <a href="10_balik_a_procedury.SQL">10_balik_a_procedury.SQL</a></p>
 <h2>11. Ověření procedur „business logiky“</h2>
-<h2>12. Skript, který doplní do tabulky Zakaznik automaticky dopočítávaný sloupec</h2>
+<p><strong>Skript:</strong> <a href="11_testovaci_skript_procedur.SQL">11_testovaci_skript_procedur.SQL</a></p>
+<p><strong>Výstup:</strong> <a href="11_vystup.txt">11_vystup.txt</a></p>
+<h2>12. Skript, který doplní do zvolené tabulky schématu dopočítávaný sloupec</h2>
+<p><strong>Skript:</strong> <a href="12_odvozene_hodnoty.SQL">12_odvozene_hodnoty.SQL</a></p>
 <h2>13. Skript, který vytvoří úložiště ještě jednou v „objektové“ podobě</h2>
 <h2>14. Skript, který provede pět dotazů znovu, nad objektovými tabulkami</h2>
 <h2>15. Navrhněte slovně fakta a dimenze pro datový sklad</h2>
