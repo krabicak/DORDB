@@ -13,7 +13,7 @@ SELECT
     mistnostid
     ,kapacita
     ,koducebny
-    ,popisucebny
+    ,popisucebny DEFAULT 'neuvedený'
 FROM mistnost@ORA2.UHK.CZ
 LOGGING;
 
@@ -37,15 +37,15 @@ SELECT
     pracovnikid
     ,jmeno
     ,prijmeni
-    ,titulpred
-    ,titulza 
-    ,telefon
-    ,mobil 
-    ,email
+    ,titulpred DEFAULT 'neuveden'
+    ,titulza DEFAULT 'neuveden' 
+    ,telefon DEFAULT 'neuveden'
+    ,mobil DEFAULT 'neuveden' 
+    ,email DEFAULT 'neuveden'
     ,pracovisteid
     ,heslo  
     ,plat   
-    ,nadrizenyid 
+    ,nadrizenyid DEFAULT 'neuveden'
 FROM pracovnik@ORA2.UHK.CZ
 LOGGING;
 
@@ -64,8 +64,6 @@ SELECT
     ,pocetkreditu
     ,zkratkazakonceni
     ,zkratkakategorie
-    ,vyukova_akce_vyukovaakceid  INTEGER 
-		CONSTRAINT nnc_predmet_akce_akceid NOT NULL
 FROM predmet@ORA2.UHK.CZ
 LOGGING;
 
@@ -89,8 +87,8 @@ SELECT
     vyukovaakceid
     ,maxstudentu
     ,zpusobvyukyzkrata
-    ,pocatek
-    ,konec
+    ,pocatek  DEFAULT '01-01-2000T08:00:00'
+    ,konec DEFAULT '01-01-2000T09:00:00'
     ,mistnostid
 FROM vyukova_akce@ORA2.UHK.CZ
 LOGGING;
@@ -100,7 +98,7 @@ ALTER TABLE vyukova_akce ADD CONSTRAINT vyukova_akce_pk PRIMARY KEY ( vyukovaakc
 CREATE TABLE zakonceni_predmetu As
 SELECT
     zkratkazakonceni
-    ,azevzakonceni
+    ,nazevzakonceni
 FROM zakonceni_predmetu@ORA2.UHK.CZ
 LOGGING;
 
@@ -108,12 +106,15 @@ ALTER TABLE zakonceni_predmetu ADD CONSTRAINT zakonceni_predmetu_pk PRIMARY KEY 
 
 CREATE TABLE zapis_predmetu As
 SELECT
-    predmetid
-    ,studentid
-    ,pokus
-    ,vystudovan
-    ,pracovnikid
-FROM zapis_predmetu@ORA2.UHK.CZ
+    zp.predmetid
+    ,zp.studentid
+    ,zp.pokus
+    ,zp.vystudovan
+    ,v.pracovnikid
+    ,va.vyukovaakceid
+FROM zapis_predmetu@ORA2.UHK.CZ zp 
+    JOIN vyukova_akce@ORA2.UHK.CZ va ON va.predmetid=zp.predmetid
+    JOIN vyucujici@ORA2.UHK.CZ v ON v.vyukovaakceid=va.vyukovaakceid
 LOGGING;
 
 CREATE TABLE zpusob_vyuky As
