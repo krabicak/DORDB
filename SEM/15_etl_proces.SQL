@@ -13,7 +13,7 @@ SELECT
     mistnostid
     ,kapacita
     ,koducebny
-    ,popisucebny DEFAULT 'neuvedený'
+    ,nvl(popisucebny, 'neuvedený') AS "popisucebny" 
 FROM mistnost@ORA2.UHK.CZ
 LOGGING;
 
@@ -21,6 +21,7 @@ ALTER TABLE mistnost ADD CONSTRAINT mistnost_pk PRIMARY KEY ( mistnostid );
 
 CREATE TABLE pracoviste 
 As
+SELECT
     pracovisteid
     ,nazev
     ,zkratka
@@ -37,23 +38,19 @@ SELECT
     pracovnikid
     ,jmeno
     ,prijmeni
-    ,titulpred DEFAULT 'neuveden'
-    ,titulza DEFAULT 'neuveden' 
-    ,telefon DEFAULT 'neuveden'
-    ,mobil DEFAULT 'neuveden' 
-    ,email DEFAULT 'neuveden'
+    ,nvl(titulpred, 'neuveden') AS "titulpred"
+    ,nvl(titulza, 'neuveden') AS "titulza" 
+    ,nvl(telefon, 'neuveden') AS "telefon"
+    ,nvl(mobil, 'neuveden') AS "mobil"
+    ,nvl(email, 'neuveden') AS "email"
     ,pracovisteid
     ,heslo  
     ,plat   
-    ,nadrizenyid DEFAULT 'neuveden'
+    ,nvl(nadrizenyid, 0) AS "nadrizenyid"
 FROM pracovnik@ORA2.UHK.CZ
 LOGGING;
 
 ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_pk PRIMARY KEY ( pracovnikid );
-
-ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_mobil_un UNIQUE ( mobil );
-
-ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_email_un UNIQUE ( email );
 
 CREATE TABLE predmet 
 As
@@ -67,14 +64,14 @@ SELECT
 FROM predmet@ORA2.UHK.CZ
 LOGGING;
 
-ALTER TABLE predmet ADD CONSTRAINT predmet_pk PRIMARY KEY ( predmet_id );
+ALTER TABLE predmet ADD CONSTRAINT predmet_pk PRIMARY KEY ( predmetid );
 
 ALTER TABLE predmet ADD CONSTRAINT predmet_zkratka_un UNIQUE ( zkratka );
 
 CREATE TABLE student 
 As
 SELECT
-    ,studentid
+    studentid
     ,jmeno
     ,prijmeni
 FROM student@ORA2.UHK.CZ
@@ -87,8 +84,8 @@ SELECT
     vyukovaakceid
     ,maxstudentu
     ,zpusobvyukyzkrata
-    ,pocatek  DEFAULT '01-01-2000T08:00:00'
-    ,konec DEFAULT '01-01-2000T09:00:00'
+    ,nvl(pocatek, to_date('08.02.20','DD.MM.RR')) AS "pocatek"
+    ,nvl(konec, to_date('08.02.20','DD.MM.RR')) AS "konec"
     ,mistnostid
 FROM vyukova_akce@ORA2.UHK.CZ
 LOGGING;
@@ -104,7 +101,8 @@ LOGGING;
 
 ALTER TABLE zakonceni_predmetu ADD CONSTRAINT zakonceni_predmetu_pk PRIMARY KEY ( zkratkazakonceni );
 
-CREATE TABLE zapis_predmetu As
+CREATE TABLE zapis_predmetu 
+As
 SELECT
     zp.predmetid
     ,zp.studentid
@@ -113,10 +111,11 @@ SELECT
     ,v.pracovnikid
     ,va.vyukovaakceid
 FROM zapis_predmetu@ORA2.UHK.CZ zp 
-    JOIN vyukova_akce@ORA2.UHK.CZ va ON va.predmetid=zp.predmetid
-    JOIN vyucujici@ORA2.UHK.CZ v ON v.vyukovaakceid=va.vyukovaakceid
-LOGGING;
-
+     ,vyukova_akce@ORA2.UHK.CZ va 
+     ,vyucujici@ORA2.UHK.CZ v 
+    WHERE va.predmetid=zp.predmetid
+    AND v.vyukovaakceid=va.vyukovaakceid;
+    
 CREATE TABLE zpusob_vyuky As
 SELECT
     zkrata
@@ -127,51 +126,46 @@ LOGGING;
 ALTER TABLE zpusob_vyuky ADD CONSTRAINT zpusob_vyuky_pk PRIMARY KEY ( zkrata );
 
 ALTER TABLE pracovnik
-    ADD CONSTRAINT pracovnik_pracoviste_fk FOREIGN KEY ( pracoviste_pracovisteid )
+    ADD CONSTRAINT pracovnik_pracoviste_fk FOREIGN KEY ( pracovisteid )
         REFERENCES pracoviste ( pracovisteid )
     NOT DEFERRABLE;
 
 ALTER TABLE pracovnik
-    ADD CONSTRAINT pracovnik_pracovnik_fk FOREIGN KEY ( pracovnik_pracovnikid )
+    ADD CONSTRAINT pracovnik_pracovnik_fk FOREIGN KEY ( pracovnikid )
         REFERENCES pracovnik ( pracovnikid )
     NOT DEFERRABLE;
 
 ALTER TABLE predmet
-    ADD CONSTRAINT predmet_kategorie_fk FOREIGN KEY ( kategorie_zkratka )
+    ADD CONSTRAINT predmet_kategorie_fk FOREIGN KEY ( zkratkakategorie )
         REFERENCES kategorie_predmetu ( zkratkakategorie )
     NOT DEFERRABLE;
 
 ALTER TABLE predmet
-    ADD CONSTRAINT predmet_vyukova_akce_fk FOREIGN KEY ( vyukova_akce_vyukovaakceid )
-        REFERENCES vyukova_akce ( vyukovaakceid )
-    NOT DEFERRABLE;
-
-ALTER TABLE predmet
-    ADD CONSTRAINT predmet_zakonceni_fk FOREIGN KEY ( zakonceni_zkratka )
+    ADD CONSTRAINT predmet_zakonceni_fk FOREIGN KEY ( zkratkazakonceni )
         REFERENCES zakonceni_predmetu ( zkratkazakonceni )
     NOT DEFERRABLE;
 
 ALTER TABLE vyukova_akce
-    ADD CONSTRAINT vyukova_akce_mistnost_fk FOREIGN KEY ( mistnost_mistnostid )
+    ADD CONSTRAINT vyukova_akce_mistnost_fk FOREIGN KEY ( mistnostid )
         REFERENCES mistnost ( mistnostid )
     NOT DEFERRABLE;
 
 ALTER TABLE vyukova_akce
-    ADD CONSTRAINT vyukova_akce_zpusob_vyuky_fk FOREIGN KEY ( zpusob_vyuky_zkrata )
+    ADD CONSTRAINT vyukova_akce_zpusob_vyuky_fk FOREIGN KEY ( ZPUSOBVYUKYZKRATA )
         REFERENCES zpusob_vyuky ( zkrata )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_pracovnik_fk FOREIGN KEY ( pracovnik_pracovnikid )
+    ADD CONSTRAINT zapis_predmetu_pracovnik_fk FOREIGN KEY ( pracovnikid )
         REFERENCES pracovnik ( pracovnikid )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_predmet_fk FOREIGN KEY ( predmet_predmetid )
-        REFERENCES predmet ( predmet_id )
+    ADD CONSTRAINT zapis_predmetu_predmet_fk FOREIGN KEY ( predmetid )
+        REFERENCES predmet ( predmetid )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_student_fk FOREIGN KEY ( student_studentid )
+    ADD CONSTRAINT zapis_predmetu_student_fk FOREIGN KEY ( studentid )
         REFERENCES student ( studentid )
     NOT DEFERRABLE;

@@ -1,0 +1,12 @@
+v žádné místnosti není více jak 1 student
+select m.mistnostid, count(zp.studentid) as "Počet studentů" from mistnost m 
+join vyukova_akce va on m.mistnostid=va.mistnostid 
+join zapis_predmetu zp on va.vyukovaakceid=zp.vyukovaakceid
+where va."pocatek">to_date('31.12.19','DD.MM.RR') 
+    AND va."pocatek"<to_date('01.01.21','DD.MM.RR')
+    AND va."konec"<to_date('01.01.21','DD.MM.RR')
+    AND va."konec"<to_date('01.01.21','DD.MM.RR')
+    group by rollup(m.mistnostid,zp.studentid)
+    ORDER BY "Počet studentů";
+
+hotovpe1 ORA2
