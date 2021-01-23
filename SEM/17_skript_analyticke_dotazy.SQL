@@ -9,12 +9,12 @@ where va."pocatek">to_date('31.12.19','DD.MM.RR')
     group by rollup(m.koducebny,zp.studentid)
     ORDER BY "Počet studentů";
 
---Vyucujici, ktery ucil nejvice studentu prvni pololeti roku 2021
-select count(zp.studentid) from pracovnik p 
+--Vyucujici, ktery ucil nejvice studentu prvni pololeti roku 2020
+select * from (
+select p.jmeno, p.prijmeni, count(zp.studentid) as "Počet studentů" from pracovnik p 
 join zapis_predmetu zp on p.pracovnikid=zp.pracovnikid
-join vyukova_akce va on zp.vyukovaakceid=va.vyukovaakceid 
-where va."pocatek">to_date('31.12.20','DD.MM.RR') 
-    AND va."pocatek"<to_date('01.07.21','DD.MM.RR')
-    AND va."konec">to_date('01.01.21','DD.MM.RR')
-    AND va."konec"<to_date('01.07.21','DD.MM.RR')
-    group by p.pracovnikid,p.jmeno,p.prijmeni;
+join vyukova_akce va on zp.vyukovaakceid=va.vyukovaakceid
+where va."pocatek">to_date('31.12.19','DD.MM.RR')
+AND va."pocatek"<to_date('01.07.20','DD.MM.RR')
+group by p.pracovnikid,p.jmeno,p.prijmeni
+order by "Počet studentů") where rownum=1;
