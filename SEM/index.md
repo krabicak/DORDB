@@ -100,7 +100,18 @@ Nelze zapsat více studentů na výukovou akci než je kapacita
 ##7. Skript, který naplní tabulky testovacími daty
 **Skript:** [07\\_testovaci\\_data.SQL](07_testovaci_data.SQL)
 ##8. Skript, který provede postupně všechny navržené dotazy z bodu 4
+
+**Dotazy:** [08\\_dotazy\\_z\\_bodu_4.txt](08_dotazy_z_bodu_4.txt)
+
+**Porovnání:** [08\\_porovnani.txt](08_porovnani.txt)
+
+**Výsledek:** [08\\_vysledky\\_dotazu.txt](08_vysledky_dotazu.txt)
 ##9. Skript, který se pokusí porušit všechna dodatečná integritní omezení
+
+**Skript:** [09\\_poruseni\\_omezeni.SQL](09_poruseni_omezeni.SQL)
+
+**Výstup:** [09\\_vystup.txt](09_vystup.txt)
+
 ##10. Skript pro vytvoření balíku (package) a procedur „business logiky“
 
 **Skript:** [10\\_balik\\_a\\_procedury.SQL](10_balik_a_procedury.SQL)
@@ -115,7 +126,24 @@ Nelze zapsat více studentů na výukovou akci než je kapacita
 
 **Skript:** [12\\_odvozene\\_hodnoty.SQL](12_odvozene_hodnoty.SQL)
 
-##13. Skript, který vytvoří úložiště ještě jednou v „objektové“ podobě
-##14. Skript, který provede pět dotazů znovu, nad objektovými tabulkami
-##15. Navrhněte slovně fakta a dimenze pro datový sklad
-##Skript pro vyčištění databáze
+##13. Fakta a dimenze (E-R diagram) pro datový sklad vycházející z vaší databáze##
+![ERdiagram](13_ER_model_datovy_sklad.PNG)
+
+##14. Skript, který vytvoří databázové schéma odpovídající E-R diagramu datového skladu.##
+
+**Skript:** [14\\_er\\_schema.SQL](14_er_schema.SQL)
+
+##15. Skript pro jednoduchý ETL proces dat z vaši produkční databáze##
+
+**Skript:** [15\\_etl\\_proces.SQL](15_etl_proces.SQL)
+
+##16. Návrh dvou slovně formulovaných analytických dotazů nad datovým skladem##
+
+1. Seznam všech místností dle využití studenty za rok 2020
+2. Vyucujici, ktery ucil nejvice studentu prvni pololeti roku 2021
+
+[16\\_analyticke\\_dotazy.txt](16_analyticke_dotazy.txt)
+
+##17. Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.##
+
+**Skript:** [17\\_skript\\_analyticke\\_dotazy.SQL](17_skript_analyticke_dotazy.SQL)

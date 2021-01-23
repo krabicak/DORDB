@@ -40,26 +40,26 @@ ALTER TABLE pracoviste ADD CONSTRAINT pracoviste_pk PRIMARY KEY ( pracovisteid )
 ALTER TABLE pracoviste ADD CONSTRAINT pracoviste_zkratka_un UNIQUE ( zkratka );
 
 CREATE TABLE pracovnik (
-    pracovnikid              INTEGER NOT NULL,
-    jmeno                    NVARCHAR2(50) NOT NULL,
-    prijmeni                 NVARCHAR2(50) NOT NULL,
-    titulpred                NVARCHAR2(50),
-    titulza                  NVARCHAR2(50),
-    telefon                  NVARCHAR2(50),
-    mobil                    NVARCHAR2(50),
-    email                    NVARCHAR2(50),
-    pracoviste_pracovisteid  INTEGER,
-    heslo                    NVARCHAR2(100) NOT NULL,
-    plat                     INTEGER NOT NULL,
-    pracovnik_pracovnikid    INTEGER
+    pracovnikid            INTEGER NOT NULL,
+    jmeno                  NVARCHAR2(50) NOT NULL,
+    prijmeni               NVARCHAR2(50) NOT NULL,
+    titulpred              NVARCHAR2(50),
+    titulza                NVARCHAR2(50),
+    telefon                NVARCHAR2(50),
+    mobil                  NVARCHAR2(50),
+    email                  NVARCHAR2(50),
+    pracoviste_id          INTEGER,
+    heslo                  NVARCHAR2(100) NOT NULL,
+    plat                   INTEGER NOT NULL,
+    pracovnik_pracovnikid  INTEGER
 )
 LOGGING;
 
 ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_pk PRIMARY KEY ( pracovnikid );
 
-ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_mobil_un UNIQUE ( mobil );
-
 ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_email_un UNIQUE ( email );
+
+ALTER TABLE pracovnik ADD CONSTRAINT pracovnik_mobil_un UNIQUE ( mobil );
 
 CREATE TABLE predmet (
     predmet_id                  INTEGER
@@ -71,7 +71,7 @@ CREATE TABLE predmet (
     pocetkreditu                INTEGER
         CONSTRAINT nnc_predmet_pocetkreditu NOT NULL,
     zakonceni_predmetu_zkratka  NVARCHAR2(10)
-             CONSTRAINT nnc_predmet_zakonceni_zkratka NOT NULL,
+        CONSTRAINT nnc_predmet_zakonceni_zkratka NOT NULL,
     kategorie_predmetu_zkratka  NVARCHAR2(10)
 )
 LOGGING;
@@ -110,20 +110,23 @@ LOGGING;
 ALTER TABLE zakonceni_predmetu ADD CONSTRAINT zakonceni_zkratka_pk PRIMARY KEY ( zkratkazakonceni );
 
 CREATE TABLE zapis_predmetu (
-    predmet_predmet_id          INTEGER
-             CONSTRAINT nnc_zapis_predmetu_predmet_id NOT NULL,
-    student_studentid           INTEGER
-             CONSTRAINT nnc_zapis_predmetu_studentid NOT NULL,
-    pokus                       INTEGER
+    predmet_id      INTEGER
+        CONSTRAINT nnc_zapis_predmetu_predmet_id NOT NULL,
+    studentid       INTEGER
+        CONSTRAINT nnc_zapis_predmetu_studentid NOT NULL,
+    pokus           INTEGER
         CONSTRAINT nnc_zapis_predmetu_pokus NOT NULL,
-    vystudovan                  CHAR(1)
+    vystudovan      CHAR(1)
         CONSTRAINT nnc_zapis_predmetu_vystudovan NOT NULL,
-    pracovnik_pracovnikid       INTEGER 
-             CONSTRAINT nnc_zapis_predmetu_pracovnikid NOT NULL,
-    vyukova_akce_vyukovaakceid  INTEGER 
-             CONSTRAINT nnc_zapis_predmetu_akce_id NOT NULL
+    pracovnik_id    INTEGER
+        CONSTRAINT nnc_zapis_predmetu_pracovnikid NOT NULL,
+    vyukovaakce_id  INTEGER
+        CONSTRAINT nnc_zapis_predmetu_akce_id NOT NULL
 )
 LOGGING;
+
+ALTER TABLE zapis_predmetu ADD CONSTRAINT zapis_predmetu_pk PRIMARY KEY ( predmet_id,
+                                                                          studentid );
 
 CREATE TABLE zpusob_vyuky (
     zkrata        NVARCHAR2(10) NOT NULL,
@@ -134,7 +137,7 @@ LOGGING;
 ALTER TABLE zpusob_vyuky ADD CONSTRAINT zpusob_vyuky_pk PRIMARY KEY ( zkrata );
 
 ALTER TABLE pracovnik
-    ADD CONSTRAINT pracovnik_pracoviste_fk FOREIGN KEY ( pracoviste_pracovisteid )
+    ADD CONSTRAINT pracovnik_pracoviste_fk FOREIGN KEY ( pracoviste_id )
         REFERENCES pracoviste ( pracovisteid )
     NOT DEFERRABLE;
 
@@ -164,21 +167,21 @@ ALTER TABLE vyukova_akce
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_pracovnik_fk FOREIGN KEY ( pracovnik_pracovnikid )
+    ADD CONSTRAINT zapis_predmetu_pracovnik_fk FOREIGN KEY ( pracovnik_id )
         REFERENCES pracovnik ( pracovnikid )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_predmet_fk FOREIGN KEY ( predmet_predmet_id )
+    ADD CONSTRAINT zapis_predmetu_predmet_fk FOREIGN KEY ( predmet_id )
         REFERENCES predmet ( predmet_id )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_student_fk FOREIGN KEY ( student_studentid )
+    ADD CONSTRAINT zapis_predmetu_student_fk FOREIGN KEY ( studentid )
         REFERENCES student ( studentid )
     NOT DEFERRABLE;
 
 ALTER TABLE zapis_predmetu
-    ADD CONSTRAINT zapis_predmetu_vyukova_akce_fk FOREIGN KEY ( vyukova_akce_vyukovaakceid )
+    ADD CONSTRAINT zapis_predmetu_vyukova_akce_fk FOREIGN KEY ( vyukovaakce_id )
         REFERENCES vyukova_akce ( vyukovaakceid )
     NOT DEFERRABLE;
