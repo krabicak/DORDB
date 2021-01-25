@@ -147,3 +147,6 @@ Nelze zapsat více studentů na výukovou akci než je kapacita
 ##17. Skript (včetně výstupu spool), který provede postupně všechny navržené analytické dotazy.##
 
 **Skript:** [17\\_skript\\_analyticke\\_dotazy.SQL](17_skript_analyticke_dotazy.SQL)
+##Skript pro vyčištění databáze##
+
+**Skript:** [drop_tables.sql](../drop_tables.sql)
